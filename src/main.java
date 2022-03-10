@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-//import scanner
 import java.util.Scanner;
+import java.util.ArrayList;
 
 class Main {
-
+    //create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
-    
 
         Scanner scanner = new Scanner(System.in);
         int x = 1;
@@ -41,22 +39,22 @@ class Main {
                     System.out.println("===========================");
                     break;
                 case 3:
-                    
+
                     break;
                 case 4:
-    
+
                     break;
                 case 5:
-                    
+
                     break;
                 case 6:
-                    
+
                     break;
                 case 7:
-                    
+
                     break;
                 case 8:
-                    
+
                     break;
             }
 
@@ -65,4 +63,3 @@ class Main {
     }
 
 }
-
