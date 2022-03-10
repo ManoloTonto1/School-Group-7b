@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-class Main {
+public class Main {
     //create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.

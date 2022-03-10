@@ -7,7 +7,7 @@ public class Student {
     private ArrayList<Examen> gehaaldeExamens;
 
     public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
-
+        this.naam = naam;
     }
     public void addGehaaldeExamen(Examen examens){
 
