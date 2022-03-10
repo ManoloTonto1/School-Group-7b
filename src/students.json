@@ -1,0 +1,19 @@
+{
+    "admin": {
+        "username": "admin",
+        "password": "admin",
+        "userType": "admin"
+    },
+
+    "696969":{
+        "naam": "Martijn Gelton",
+        "studentnummer": "696969",
+        "geslaagde toetsen":[
+            "scheikunde",
+            "wiskunde",
+            "biologie",
+            "informatica"
+        ]
+    }
+
+}
