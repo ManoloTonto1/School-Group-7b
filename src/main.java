@@ -15,6 +15,10 @@ import org.json.simple.parser.ParseException;
 public class Main {
     //create main method
     public static void main(String[] args) {
+        // create arraylists for the students an exams
+        ArrayList studenten = new ArrayList<Student>();
+        ArrayList examens = new ArrayList<Examen>();
+
         // Start any objects now like the loading from shit.
         readJson();
 
