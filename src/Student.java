@@ -6,8 +6,9 @@ public class Student {
     private int studentNummer;
     private ArrayList<Examen> gehaaldeExamens;
 
-    public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
+    public Student(String naam, int studentNummer /*, ArrayList<Examen> gehaaldeExamens */){
         this.naam = naam;
+        this.studentNummer = studentNummer;
     }
     public Student(String naam){
         this.naam = naam;
