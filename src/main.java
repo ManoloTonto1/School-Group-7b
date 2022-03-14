@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
- 
+
 //import JSON
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,7 +13,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Main {
-    //create main method
+    // create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
         readJson();
@@ -42,12 +42,12 @@ public class Main {
                     break;
                 case 1:
                     System.out.println("===========================");
-                    //add shit here.
+                    // add shit here.
                     System.out.println("===========================");
                     break;
                 case 2:
                     System.out.println("===========================");
-                    //add shit here
+                    // add shit here
                     System.out.println("===========================");
                     break;
                 case 3:
@@ -73,37 +73,45 @@ public class Main {
         }
         scanner.close();
     }
-    @SuppressWarnings("unchecked")
-    public static void readJson(){
-               //JSON parser object to parse read file
-               JSONParser parser = new JSONParser(); 
-         
-               try (FileReader reader = new FileReader("students.json"))
-               {
-                JSONObject jsonObject = (JSONObject) parser.parse(reader);
-                //System.out.println(jsonObject);
-               
-                jsonObject.forEach((key, value) -> {
-                    Student student = new Student(key.toString());
-                    System.out.println(student.getNaam());
-                    for (String i : value) {
-                        
-                    }
-                    //System.out.println(key + " : " + value);
-                });
-                  
 
-        
-               } catch (FileNotFoundException e) {
-                   e.printStackTrace();
-               } catch (IOException e) {
-                   e.printStackTrace();
-               } catch (ParseException e) {
-                   e.printStackTrace();
-               }
+    @SuppressWarnings("unchecked")
+    public static void readJson() {
+        // JSON parser object to parse read file
+        JSONParser parser = new JSONParser();
+
+        try (FileReader reader = new FileReader("students.json")) {
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            // System.out.println(jsonObject);
+
+            jsonObject.forEach((key, value) -> {
+                Student student = new Student(key.toString());
+
+                // get children from the object
+                JSONObject objectChild = (JSONObject) value;
+                JSONArray arrayChild = (JSONArray) objectChild.get("gehaaldeExamens");
+
+                // Set student nummer
+                student.setStudentNummer(Integer.parseInt(objectChild.get("studentNummer").toString()));
+
+                // create array list and set the avlues to the object
+                ArrayList<String> list = new ArrayList<String>();
+
+                for (int i = 0; i < arrayChild.size(); i++) {
+                    list.add(arrayChild.get(i).toString());
+                }
+
+                student.setGehaaldeExamens(list);
+
+            });
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
-
-
 
 }

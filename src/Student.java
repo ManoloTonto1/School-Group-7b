@@ -4,7 +4,8 @@ public class Student {
     Examen examens;
     private String naam;
     private int studentNummer;
-    private ArrayList<Examen> gehaaldeExamens;
+   // private ArrayList<Examen> gehaaldeExamens;
+    private ArrayList<String> gehaaldeExamens;
 
     public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
         this.naam = naam;
@@ -25,13 +26,17 @@ public class Student {
         return studentNummer;
     }
 
-    public ArrayList<Examen> getGehaaldeExamens() {
+    public ArrayList<String> getGehaaldeExamens() {
         return gehaaldeExamens;
     }
+    
 
     //Setters
     public void setStudentNummer(int studentNummer) {
         this.studentNummer = studentNummer;
+    }
+    public void setGehaaldeExamens(ArrayList<String> gehaaldeExamens) {
+        this.gehaaldeExamens = gehaaldeExamens;
     }
 
 }
