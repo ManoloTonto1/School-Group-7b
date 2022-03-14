@@ -9,6 +9,10 @@ public class Student {
     public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
         this.naam = naam;
     }
+    public Student(String naam){
+        this.naam = naam;
+    }
+    //Getters
     public void addGehaaldeExamen(Examen examens){
 
     }
@@ -23,6 +27,11 @@ public class Student {
 
     public ArrayList<Examen> getGehaaldeExamens() {
         return gehaaldeExamens;
+    }
+
+    //Setters
+    public void setStudentNummer(int studentNummer) {
+        this.studentNummer = studentNummer;
     }
 
 }
