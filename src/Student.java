@@ -10,8 +10,8 @@ public class Student {
     public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
         this.naam = naam;
     }
-    public Student(String naam){
-        this.naam = naam;
+    public Student(Integer studentNummer){
+        this.studentNummer= studentNummer;
     }
     //Getters
     public void addGehaaldeExamen(Examen examens){
@@ -32,8 +32,8 @@ public class Student {
     
 
     //Setters
-    public void setStudentNummer(int studentNummer) {
-        this.studentNummer = studentNummer;
+    public void setNaam(String naam) {
+        this.naam = naam;
     }
     public void setGehaaldeExamens(ArrayList<String> gehaaldeExamens) {
         this.gehaaldeExamens = gehaaldeExamens;

@@ -16,7 +16,8 @@ public class Main {
     // create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
-        readJson();
+        ArrayList<Student> studenten = new ArrayList<Student>();
+        LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
         int x = 1;
@@ -32,6 +33,7 @@ public class Main {
             System.out.println("6) Is student geslaagd voor test?");
             System.out.println("7) Welke examens heeft student gehaald?");
             System.out.println("8) Welke student heeft de meeste examens gehaald?");
+            System.out.println();
             System.out.println("----------------------------------------------------");
 
             int input = scanner.nextInt();
@@ -39,6 +41,7 @@ public class Main {
                 case 0:
                     System.out.println("Goodbye");
                     x = 0;
+                    saveStudents(studenten);
                     break;
                 case 1:
                     System.out.println("===========================");
@@ -47,7 +50,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("===========================");
-                    // add shit here
+                    studenten.forEach(student -> System.out.println(student.getNaam()));
                     System.out.println("===========================");
                     break;
                 case 3:
@@ -75,7 +78,7 @@ public class Main {
     }
 
     @SuppressWarnings("unchecked")
-    public static void readJson() {
+    public static ArrayList<Student> LoadStudents(ArrayList<Student> studenten) {
         // JSON parser object to parse read file
         JSONParser parser = new JSONParser();
 
@@ -84,14 +87,14 @@ public class Main {
             // System.out.println(jsonObject);
 
             jsonObject.forEach((key, value) -> {
-                Student student = new Student(key.toString());
+                Student student = new Student(Integer.parseInt(key.toString()));
 
                 // get children from the object
                 JSONObject objectChild = (JSONObject) value;
                 JSONArray arrayChild = (JSONArray) objectChild.get("gehaaldeExamens");
 
                 // Set student nummer
-                student.setStudentNummer(Integer.parseInt(objectChild.get("studentNummer").toString()));
+                student.setNaam(objectChild.get("naam").toString());
 
                 // create array list and set the avlues to the object
                 ArrayList<String> list = new ArrayList<String>();
@@ -101,7 +104,7 @@ public class Main {
                 }
 
                 student.setGehaaldeExamens(list);
-
+                studenten.add(student);
             });
 
         } catch (FileNotFoundException e) {
@@ -111,7 +114,43 @@ public class Main {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return studenten;
 
+    }
+    @SuppressWarnings("unchecked")
+    public static void saveStudents(ArrayList<Student> studenten) {
+        //create the JSON object where we will store the data from the Array list
+        JSONObject root = new JSONObject();
+        JSONObject students = new JSONObject();
+
+        for (Student student : studenten) {
+            //Create the child nodes to match the Schema of the JSON file
+            JSONObject objectChild = new JSONObject();
+            JSONArray arrayChild = new JSONArray();
+
+            //put the name and the student number in the root of the JSON object
+            objectChild.put("naam", student.getNaam());
+            objectChild.put("studentNummer", student.getStudentNummer());
+
+            //add the examen to the array
+            for (String examen : student.getGehaaldeExamens()) {
+                arrayChild.add(examen);
+            }
+
+            //finish up the object before writing it to the JSON file
+            objectChild.put("gehaaldeExamens", arrayChild);
+            root.put(student.getStudentNummer(), objectChild);
+        }
+            students.put("students", root);
+        
+
+        try (FileWriter file = new FileWriter("students.json")) {
+            file.write(root.toJSONString());
+            file.flush();
+            System.out.println("Successfully saved File.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
