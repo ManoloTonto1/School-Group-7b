@@ -16,7 +16,8 @@ public class Main {
     // create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
-        readJson();
+        ArrayList<Student> studenten = new ArrayList<Student>();
+        readJson(studenten);
 
         Scanner scanner = new Scanner(System.in);
         int x = 1;
@@ -32,6 +33,7 @@ public class Main {
             System.out.println("6) Is student geslaagd voor test?");
             System.out.println("7) Welke examens heeft student gehaald?");
             System.out.println("8) Welke student heeft de meeste examens gehaald?");
+            System.out.println();
             System.out.println("----------------------------------------------------");
 
             int input = scanner.nextInt();
@@ -47,7 +49,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("===========================");
-                    // add shit here
+                    studenten.forEach(student -> System.out.println(student.getNaam()));
                     System.out.println("===========================");
                     break;
                 case 3:
@@ -75,7 +77,7 @@ public class Main {
     }
 
     @SuppressWarnings("unchecked")
-    public static void readJson() {
+    public static ArrayList<Student> readJson(ArrayList<Student> studenten) {
         // JSON parser object to parse read file
         JSONParser parser = new JSONParser();
 
@@ -101,7 +103,7 @@ public class Main {
                 }
 
                 student.setGehaaldeExamens(list);
-
+                studenten.add(student);
             });
 
         } catch (FileNotFoundException e) {
@@ -111,6 +113,7 @@ public class Main {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return studenten;
 
     }
 
