@@ -6,8 +6,8 @@ public class Examen {
     private int minCorrect;
     private ArrayList<Vraag> vragen;
 
-    public Examen(String naam, int minCorrect, ArrayList<Vraag> vragen){
-
+    public Examen(String naam){
+        this.naam = naam;
     }
     //Getters
     public String getNaam(){

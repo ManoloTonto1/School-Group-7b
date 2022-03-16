@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public class Student {
-    Examen examens;
     private String naam;
     private int studentNummer;
-    private ArrayList<Examen> gehaaldeExamens;
+    private ArrayList<String> gehaaldeExamens;
 
-    public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
+    public Student(String naam, int studentNummer, ArrayList<String> gehaaldeExamens){
         this.naam = naam;
         this.studentNummer = studentNummer;
+        this.gehaaldeExamens = gehaaldeExamens;
     }
 
     public Student(String naam, int studentNummer){
@@ -16,8 +16,8 @@ public class Student {
         this.studentNummer = studentNummer;
     }
     //Getters
-    public void addGehaaldeExamen(Examen examens){
-
+    public void addGehaaldeExamen(String examen){
+        gehaaldeExamens.add(examen);
     }
     //Getters
     public String getNaam() {
@@ -28,7 +28,7 @@ public class Student {
         return studentNummer;
     }
 
-    public ArrayList<Examen> getGehaaldeExamens() {
+    public ArrayList<String> getGehaaldeExamens() {
         return gehaaldeExamens;
     }
 
