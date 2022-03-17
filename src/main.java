@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
 class Main {
     // create main method
     public static void main(String[] args) {
@@ -63,17 +64,41 @@ class Main {
                     Student student = RegisterStudent();
                     boolean studentAlreadyExists = false;
 
+
+                    int studentNumberLimit = 8;
+                    boolean studentNumberOverLimit = false;
+
+                    for (Student _student : studenten)
+                    {
+                        if(_student.getStudentNummer() == student.getStudentNummer()) {
+
                     for (Student _student : studenten) {
                         if (_student.getStudentNummer() == student.getStudentNummer()) {
+
                             studentAlreadyExists = true;
-                            break;
+                        }
+
+                        String studentNumberString = ""+student.getStudentNummer()+"";
+                        if(studentNumberString.length() > studentNumberLimit) {
+                            studentNumberOverLimit = true;
                         }
                     }
 
+
+                    if(!studentAlreadyExists) {
+                        if(!studentNumberOverLimit) {
+
+                            studenten.add(student);
+                            System.out.println("[i] Student succesvol ingeschreven.");
+                            saveStudents(studenten);
+                        } else {
+                            System.out.println("[!] Student nummer heeft te veel characters.");
+                        }
                     if (!studentAlreadyExists) {
                         studenten.add(student);
                         System.out.println("[i] Student succesvol ingeschreven.");
                         saveStudents(studenten);
+
                     } else {
                         System.out.println("[!] Student is al ingeschreven.");
                     }
@@ -180,7 +205,6 @@ class Main {
         }
     }
 
-
     public static Student RegisterStudent() {
         Scanner scanner = new Scanner(System.in);
 
@@ -195,6 +219,7 @@ class Main {
         scanner.close();
 
         return student;
+
     }
     
     
@@ -225,6 +250,7 @@ class Main {
         for(int i = 0; i < studenten.size(); i++) {
             System.out.println("student " + i + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
         }
+
     }
 
 }
