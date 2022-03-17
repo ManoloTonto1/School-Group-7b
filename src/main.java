@@ -195,6 +195,8 @@ class Main {
      * }
      */
 
+
+     //THIS needs to be fixed @Mitchell
     public static Student RegisterStudent() {
         Scanner scanner = new Scanner(System.in);
 
