@@ -1,7 +1,7 @@
 
-import java.rmi.StubNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,6 +18,8 @@ class Main {
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
         ArrayList<Student> studenten = new ArrayList<Student>();
+        ArrayList<Examen> examens = new ArrayList<>();
+        examens.add(new Examen("Java"));
         LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
@@ -46,12 +48,14 @@ class Main {
                     break;
                 case 1:
                     System.out.println("===========================");
-                    // add shit here.
+                    // add shit here
+                    showExams(examens);
                     System.out.println("===========================");
                     break;
                 case 2:
                     System.out.println("===========================");
-                    studenten.forEach(student -> System.out.println(student.getNaam()));
+                    //studenten.forEach(student -> System.out.println(student.getNaam()));
+                    showStudents(studenten);
                     System.out.println("===========================");
                     break;
                 case 3:
@@ -88,6 +92,7 @@ class Main {
 
                     break;
                 case 8:
+                showStudentMostExams(studenten);
 
                     break;
             }
@@ -213,4 +218,35 @@ class Main {
 
         return student;
     }
+    
+    @SuppressWarnings("unchecked")
+    public static void showStudentMostExams(ArrayList<Student> studenten) {
+        // create an arraylist for the number of exams of every student
+        ArrayList<Integer> studentExams = new ArrayList<>();
+
+        // fill studentexams with everyones number of exams
+        for(int i = 0; i < studenten.size(); i++) {
+            studentExams.add(studenten.get(i).getGehaaldeExamens().size());
+        }
+
+        int max = (int) Collections.max(studentExams);
+        for(int i = 0; i < studenten.size(); i++) {
+            if(studenten.get(i).getGehaaldeExamens().size() == max) {
+                System.out.println("Meeste examens gehaald: " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer() + "aantal gehaalde examens: " + max);
+            }
+        }
+    }
+
+    public static void showExams(ArrayList<Examen> examens) {
+        for(int i = 0; i < examens.size(); i++) {
+            System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
+        }
+    }
+
+    public static void showStudents(ArrayList<Student> studenten) {
+        for(int i = 0; i < studenten.size(); i++) {
+            System.out.println("student " + i + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
+        }
+    }
+
 }

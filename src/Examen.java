@@ -7,7 +7,10 @@ public class Examen {
     private ArrayList<Vraag> vragen;
 
     public Examen(String naam, int minCorrect, ArrayList<Vraag> vragen){
-
+// add shit
+    }
+    public Examen(String naam){
+        this.naam = naam;
     }
     //Getters
     public String getNaam(){
