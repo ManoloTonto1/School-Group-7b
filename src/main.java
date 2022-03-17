@@ -1,7 +1,7 @@
 
-import java.rmi.StubNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,12 +13,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class Main
-{
+
+class Main {
     // create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
         ArrayList<Student> studenten = new ArrayList<Student>();
+        ArrayList<Examen> examens = new ArrayList<>();
+        examens.add(new Examen("Java"));
         LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
@@ -47,12 +49,14 @@ public class Main
                     break;
                 case 1:
                     System.out.println("===========================");
-                    // add shit here.
+                    // add shit here
+                    showExams(examens);
                     System.out.println("===========================");
                     break;
                 case 2:
                     System.out.println("===========================");
-                    studenten.forEach(student -> System.out.println(student.getNaam()));
+                    //studenten.forEach(student -> System.out.println(student.getNaam()));
+                    showStudents(studenten);
                     System.out.println("===========================");
                     break;
                 case 3:
@@ -60,12 +64,17 @@ public class Main
                     Student student = RegisterStudent();
                     boolean studentAlreadyExists = false;
 
+
                     int studentNumberLimit = 8;
                     boolean studentNumberOverLimit = false;
 
                     for (Student _student : studenten)
                     {
                         if(_student.getStudentNummer() == student.getStudentNummer()) {
+
+                    for (Student _student : studenten) {
+                        if (_student.getStudentNummer() == student.getStudentNummer()) {
+
                             studentAlreadyExists = true;
                         }
 
@@ -74,6 +83,7 @@ public class Main
                             studentNumberOverLimit = true;
                         }
                     }
+
 
                     if(!studentAlreadyExists) {
                         if(!studentNumberOverLimit) {
@@ -84,6 +94,11 @@ public class Main
                         } else {
                             System.out.println("[!] Student nummer heeft te veel characters.");
                         }
+                    if (!studentAlreadyExists) {
+                        studenten.add(student);
+                        System.out.println("[i] Student succesvol ingeschreven.");
+                        saveStudents(studenten);
+
                     } else {
                         System.out.println("[!] Student is al ingeschreven.");
                     }
@@ -102,6 +117,7 @@ public class Main
 
                     break;
                 case 8:
+                showStudentMostExams(studenten);
 
                     break;
             }
@@ -149,35 +165,33 @@ public class Main
         }
         return studenten;
 
-
     }
+
     @SuppressWarnings("unchecked")
     public static void saveStudents(ArrayList<Student> studenten) {
-        //create the JSON object where we will store the data from the Array list
+        // create the JSON object where we will store the data from the Array list
         JSONObject root = new JSONObject();
         JSONObject students = new JSONObject();
 
         for (Student student : studenten) {
-            //Create the child nodes to match the Schema of the JSON file
+            // Create the child nodes to match the Schema of the JSON file
             JSONObject objectChild = new JSONObject();
             JSONArray arrayChild = new JSONArray();
 
-            //put the name and the student number in the root of the JSON object
+            // put the name and the student number in the root of the JSON object
             objectChild.put("naam", student.getNaam());
             objectChild.put("studentNummer", student.getStudentNummer());
 
-                if(student.getGehaaldeExamens() != null)
-                {
-                    //add the examen to the array
-                    for (String examen : student.getGehaaldeExamens())
-                    {
-                        arrayChild.add(examen);
-                    }
+            if (student.getGehaaldeExamens() != null) {
+                // add the examen to the array
+                for (String examen : student.getGehaaldeExamens()) {
+                    arrayChild.add(examen);
                 }
+            }
 
-                //finish up the object before writing it to the JSON file
-                objectChild.put("gehaaldeExamens", arrayChild);
-                root.put(student.getStudentNummer(), objectChild);
+            // finish up the object before writing it to the JSON file
+            objectChild.put("gehaaldeExamens", arrayChild);
+            root.put(student.getStudentNummer(), objectChild);
 
         }
         students.put("students", root);
@@ -190,7 +204,7 @@ public class Main
             e.printStackTrace();
         }
     }
-        
+
     public static Student RegisterStudent() {
         Scanner scanner = new Scanner(System.in);
 
@@ -202,7 +216,41 @@ public class Main
 
         Student student = new Student(studentenNummer);
         student.setNaam(naam);
+        scanner.close();
 
         return student;
+
     }
+    
+    
+    public static void showStudentMostExams(ArrayList<Student> studenten) {
+        // create an arraylist for the number of exams of every student
+        ArrayList<Integer> studentExams = new ArrayList<>();
+
+        // fill studentexams with everyones number of exams
+        for(int i = 0; i < studenten.size(); i++) {
+            studentExams.add(studenten.get(i).getGehaaldeExamens().size());
+        }
+
+        int max = (int) Collections.max(studentExams);
+        for(int i = 0; i < studenten.size(); i++) {
+            if(studenten.get(i).getGehaaldeExamens().size() == max) {
+                System.out.println("Meeste examens gehaald: " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer() + "aantal gehaalde examens: " + max);
+            }
+        }
+    }
+
+    public static void showExams(ArrayList<Examen> examens) {
+        for(int i = 0; i < examens.size(); i++) {
+            System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
+        }
+    }
+
+    public static void showStudents(ArrayList<Student> studenten) {
+        for(int i = 0; i < studenten.size(); i++) {
+            System.out.println("student " + i + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
+        }
+
+    }
+
 }
