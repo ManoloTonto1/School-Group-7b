@@ -1,4 +1,5 @@
 
+import java.rmi.StubNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
@@ -54,7 +55,25 @@ public class Main {
                     System.out.println("===========================");
                     break;
                 case 3:
+                    System.out.println("===========================");
+                    Student student = RegisterStudent();
+                    boolean studentAlreadyExists = false;
 
+                    for (Student _student : studenten)
+                    {
+                        if(_student.getStudentNummer() == student.getStudentNummer()) {
+                            studentAlreadyExists = true;
+                            break;
+                        }
+                    }
+
+                    if(!studentAlreadyExists) {
+                        studenten.add(student);
+                        System.out.println("[i] Student succesvol ingeschreven.");
+                    } else {
+                        System.out.println("[!] Student is al ingeschreven.");
+                    }
+                    System.out.println("===========================");
                     break;
                 case 4:
 
@@ -116,7 +135,50 @@ public class Main {
         }
         return studenten;
 
+
     }
+    @SuppressWarnings("unchecked")
+    public static void saveStudents(ArrayList<Student> studenten) {
+        //create the JSON object where we will store the data from the Array list
+        JSONObject root = new JSONObject();
+        JSONObject students = new JSONObject();
+
+        for (Student student : studenten) {
+            //Create the child nodes to match the Schema of the JSON file
+            JSONObject objectChild = new JSONObject();
+            JSONArray arrayChild = new JSONArray();
+
+            //put the name and the student number in the root of the JSON object
+            objectChild.put("naam", student.getNaam());
+            objectChild.put("studentNummer", student.getStudentNummer());
+
+                if(student.getGehaaldeExamens() != null)
+                {
+                    //add the examen to the array
+                    for (String examen : student.getGehaaldeExamens())
+                    {
+                        arrayChild.add(examen);
+                    }
+                }
+
+                //finish up the object before writing it to the JSON file
+                objectChild.put("gehaaldeExamens", arrayChild);
+                root.put(student.getStudentNummer(), objectChild);
+
+        }
+        students.put("students", root);
+
+
+
+        try (FileWriter file = new FileWriter("students.json")) {
+            file.write(root.toJSONString());
+            file.flush();
+            System.out.println("Successfully saved File.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+  /*
     @SuppressWarnings("unchecked")
     public static void saveStudents(ArrayList<Student> studenten) {
         //create the JSON object where we will store the data from the Array list
@@ -136,6 +198,19 @@ public class Main {
             for (String examen : student.getGehaaldeExamens()) {
                 arrayChild.add(examen);
             }
+*/
+
+    public static Student RegisterStudent() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Naam student: ");
+        String naam = scanner.nextLine();
+
+        System.out.print("Studentnummer: ");
+        int studentenNummer = scanner.nextInt();
+
+        Student student = new Student(studentenNummer);
+        student.setNaam(naam);
 
             //finish up the object before writing it to the JSON file
             objectChild.put("gehaaldeExamens", arrayChild);
@@ -153,4 +228,7 @@ public class Main {
         }
     }
 
+
+        return student;
+    }
 }

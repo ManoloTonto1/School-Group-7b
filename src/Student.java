@@ -4,7 +4,7 @@ public class Student {
     Examen examens;
     private String naam;
     private int studentNummer;
-   // private ArrayList<Examen> gehaaldeExamens;
+
     private ArrayList<String> gehaaldeExamens;
 
     public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
@@ -30,6 +30,7 @@ public class Student {
         return gehaaldeExamens;
     }
     
+
 
     //Setters
     public void setNaam(String naam) {
