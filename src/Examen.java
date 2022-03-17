@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Examen {
     Vraag vraag;
@@ -18,5 +19,22 @@ public class Examen {
     }
     public ArrayList<Vraag> getVragen(){
         return vragen;
+    }
+
+    public void maakExamen(ArrayList<Vraag> vragen){
+        int vragenGoedBeantwoord = 0;
+         Scanner sc = new Scanner(System.in);
+        for (Vraag i : vragen){
+            System.out.println(i.getVraagStelling());
+            System.out.printf("A: %s" , i.getAntwoord_A());
+            System.out.printf("B: %s" , i.getAntwoord_B());
+            System.out.print("Vul uw antwoord in : ");
+            if (sc.nextLine().equalsIgnoreCase(i.getCorrectAntwoord())){
+                vragenGoedBeantwoord++;
+            }
+        }
+        if (vragenGoedBeantwoord >= minCorrect){
+            //add examen to student
+        }
     }
 }
