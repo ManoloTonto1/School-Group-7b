@@ -13,7 +13,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-
 class Main {
     // create main method
     public static void main(String[] args) {
@@ -46,6 +45,7 @@ class Main {
                     System.out.println("Goodbye");
                     x = 0;
                     saveStudents(studenten);
+                    scanner.close();
                     break;
                 case 1:
                     System.out.println("===========================");
@@ -68,9 +68,6 @@ class Main {
                     int studentNumberLimit = 8;
                     boolean studentNumberOverLimit = false;
 
-                    for (Student _student : studenten)
-                    {
-                        if(_student.getStudentNummer() == student.getStudentNummer()) {
 
                     for (Student _student : studenten) {
                         if (_student.getStudentNummer() == student.getStudentNummer()) {
@@ -83,6 +80,7 @@ class Main {
                             studentNumberOverLimit = true;
                         }
                     }
+                
 
 
                     if(!studentAlreadyExists) {
@@ -91,17 +89,14 @@ class Main {
                             studenten.add(student);
                             System.out.println("[i] Student succesvol ingeschreven.");
                             saveStudents(studenten);
-                        } else {
+                        } 
+                        else {
                             System.out.println("[!] Student nummer heeft te veel characters.");
+                            
                         }
-                    if (!studentAlreadyExists) {
-                        studenten.add(student);
-                        System.out.println("[i] Student succesvol ingeschreven.");
-                        saveStudents(studenten);
-
-                    } else {
-                        System.out.println("[!] Student is al ingeschreven.");
                     }
+                    
+
                     System.out.println("===========================");
                     break;
                 case 4:
@@ -120,10 +115,13 @@ class Main {
                 showStudentMostExams(studenten);
 
                     break;
+                case default:
+                    System.out.println("[!] Invalid input");
+                    break;
             }
 
+            
         }
-        scanner.close();
     }
 
     @SuppressWarnings("unchecked")
@@ -216,39 +214,40 @@ class Main {
 
         Student student = new Student(studentenNummer);
         student.setNaam(naam);
-        scanner.close();
+        //scanner.close();
 
         return student;
 
     }
-    
-    
+
     public static void showStudentMostExams(ArrayList<Student> studenten) {
         // create an arraylist for the number of exams of every student
         ArrayList<Integer> studentExams = new ArrayList<>();
 
         // fill studentexams with everyones number of exams
-        for(int i = 0; i < studenten.size(); i++) {
+        for (int i = 0; i < studenten.size(); i++) {
             studentExams.add(studenten.get(i).getGehaaldeExamens().size());
         }
 
         int max = (int) Collections.max(studentExams);
-        for(int i = 0; i < studenten.size(); i++) {
-            if(studenten.get(i).getGehaaldeExamens().size() == max) {
-                System.out.println("Meeste examens gehaald: " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer() + "aantal gehaalde examens: " + max);
+        for (int i = 0; i < studenten.size(); i++) {
+            if (studenten.get(i).getGehaaldeExamens().size() == max) {
+                System.out.println("Meeste examens gehaald: " + studenten.get(i).getNaam() + " - "
+                        + studenten.get(i).getStudentNummer() + "aantal gehaalde examens: " + max);
             }
         }
     }
 
     public static void showExams(ArrayList<Examen> examens) {
-        for(int i = 0; i < examens.size(); i++) {
+        for (int i = 0; i < examens.size(); i++) {
             System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
         }
     }
 
     public static void showStudents(ArrayList<Student> studenten) {
-        for(int i = 0; i < studenten.size(); i++) {
-            System.out.println("student " + i + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
+        for (int i = 0; i < studenten.size(); i++) {
+            System.out.println(
+                    "student " + i + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
         }
 
     }
