@@ -69,6 +69,7 @@ class Main {
                     if (!studentAlreadyExists) {
                         studenten.add(student);
                         System.out.println("[i] Student succesvol ingeschreven.");
+                        saveStudents(studenten);
                     } else {
                         System.out.println("[!] Student is al ingeschreven.");
                     }
@@ -208,20 +209,7 @@ class Main {
 
         Student student = new Student(studentenNummer);
         student.setNaam(naam);
-
-        // finish up the object before writing it to the JSON file
-        objectChild.put("gehaaldeExamens", arrayChild);
-        root.put(student.getStudentNummer(), objectChild);
-
-        students.put("students", root);
-
-        try (FileWriter file = new FileWriter("students.json")) {
-            file.write(root.toJSONString());
-            file.flush();
-            System.out.println("Successfully saved File.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
 
         return student;
     }
