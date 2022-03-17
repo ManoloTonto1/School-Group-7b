@@ -192,12 +192,12 @@ class Main {
 
         Student student = new Student(studentenNummer);
         student.setNaam(naam);
-        
+        scanner.close();
 
         return student;
     }
     
-    @SuppressWarnings("unchecked")
+    
     public static void showStudentMostExams(ArrayList<Student> studenten) {
         // create an arraylist for the number of exams of every student
         ArrayList<Integer> studentExams = new ArrayList<>();
