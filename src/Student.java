@@ -7,13 +7,15 @@ public class Student {
 
     private ArrayList<String> gehaaldeExamens;
 
-    public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
+    public Student(String naam, int studentNummer, ArrayList<String> gehaaldeExamens){
         this.naam = naam;
+        this.studentNummer=studentNummer;
+        this.gehaaldeExamens=gehaaldeExamens;
     }
     public Student(Integer studentNummer){
         this.studentNummer= studentNummer;
     }
-    //Getters
+
     public void addGehaaldeExamen(Examen examens){
 
     }

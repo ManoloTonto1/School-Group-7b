@@ -14,12 +14,16 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 class Main {
+
     // create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
         ArrayList<Student> studenten = new ArrayList<Student>();
         ArrayList<Examen> examens = new ArrayList<>();
-        examens.add(new Examen("Java"));
+        examens.add(new Examen("Topo Toets"));
+        examens.add(new Examen("Higher Lower"));
+        Examen examen1 = new Examen("Topo Toets", 6);
+        Examen examen2 = new Examen("Higher Lower", 6);
         LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
@@ -103,8 +107,24 @@ class Main {
 
                     break;
                 case 5:
+                    System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
+                    int examenNummer = 1;
+                    for (Examen k : examens){
+                        System.out.println(examenNummer + "." + k.getNaam());
+                        examenNummer++;
+                    }
+                    int l = scanner.nextInt();
 
-                    break;
+                    switch (l) {
+                        case 1:
+                            examen1.examen1();
+                            examen1.maakExamen();
+                            break;
+                        case 2:
+                            examen2.examen2();
+                            examen2.maakExamen();
+                            break;
+                    }
                 case 6:
 
                     break;
@@ -115,6 +135,7 @@ class Main {
                 showStudentMostExams(studenten);
 
                     break;
+
                 case default:
                     System.out.println("[!] Invalid input");
                     break;
@@ -251,5 +272,4 @@ class Main {
         }
 
     }
-
 }
