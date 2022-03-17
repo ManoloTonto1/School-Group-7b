@@ -179,30 +179,8 @@ class Main {
             e.printStackTrace();
         }
     }
-    /*
-     * @SuppressWarnings("unchecked")
-     * public static void saveStudents(ArrayList<Student> studenten) {
-     * //create the JSON object where we will store the data from the Array list
-     * JSONObject root = new JSONObject();
-     * JSONObject students = new JSONObject();
-     * 
-     * for (Student student : studenten) {
-     * //Create the child nodes to match the Schema of the JSON file
-     * JSONObject objectChild = new JSONObject();
-     * JSONArray arrayChild = new JSONArray();
-     * 
-     * //put the name and the student number in the root of the JSON object
-     * objectChild.put("naam", student.getNaam());
-     * objectChild.put("studentNummer", student.getStudentNummer());
-     * 
-     * //add the examen to the array
-     * for (String examen : student.getGehaaldeExamens()) {
-     * arrayChild.add(examen);
-     * }
-     */
 
 
-     //THIS needs to be fixed @Mitchell
     public static Student RegisterStudent() {
         Scanner scanner = new Scanner(System.in);
 
