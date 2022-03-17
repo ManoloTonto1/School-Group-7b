@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Examen {
@@ -51,12 +52,10 @@ public class Examen {
     }
 
     public void maakExamen(){
-        examen1();
-        examen2();
        Scanner sc = new Scanner(System.in);
        int aantalVragen = 1;
        int aantalGoedeAntwoorden = 0;
-
+       Collections.shuffle(vragen); //randomize vragen order
        //begin doorlopen examens.
        System.out.println("Welkom bij het examen " + naam +". U hoeft alleen A of B in te voeren.");
        for (Vraag j : vragen){
@@ -66,14 +65,15 @@ public class Examen {
            System.out.println("B : " + j.getAntwoord_B());
            System.out.print("Vul uw antwoord in :");
            System.out.println();
-           vragen.remove(j);
            if(sc.nextLine().equalsIgnoreCase(j.getCorrectAntwoord())){
                aantalGoedeAntwoorden++;
            }
            aantalVragen++;
        }
+       vragen.removeAll(vragen);
        //Checked voldoende of onvoldoende
        if (aantalGoedeAntwoorden >= minCorrect){
+
            System.out.println(aantalGoedeAntwoorden + "/" + minCorrect);
            System.out.println("Gefeliciteert u bent geslaagd voor het examen : " + naam);
        }
