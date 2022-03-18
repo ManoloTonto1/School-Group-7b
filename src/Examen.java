@@ -51,7 +51,7 @@ public class Examen {
         return vragen;
     }
 
-    public void maakExamen(){
+    public int maakExamen(){
        Scanner sc = new Scanner(System.in);
        int aantalVragen = 1;
        int aantalGoedeAntwoorden = 0;
@@ -71,15 +71,20 @@ public class Examen {
            aantalVragen++;
        }
        vragen.removeAll(vragen);
-       //Checked voldoende of onvoldoende
-       if (aantalGoedeAntwoorden >= minCorrect){
 
-           System.out.println(aantalGoedeAntwoorden + "/" + minCorrect);
-           System.out.println("Gefeliciteert u bent geslaagd voor het examen : " + naam);
-       }
-       else {
-           System.out.println(aantalGoedeAntwoorden + "/" + minCorrect);
-           System.out.println("Helaas , u bent gezakt voor het examen : " + naam);
-       }
+       return aantalGoedeAntwoorden;
+    }
+    public boolean checkVoldoende (int aantalGoedeAntwoorden){
+        if (aantalGoedeAntwoorden >= minCorrect){
+
+            System.out.println(aantalGoedeAntwoorden + "/" + minCorrect);
+            System.out.println("Gefeliciteert u bent geslaagd voor het examen : " + naam);
+            return true;
+        }
+        else {
+            System.out.println(aantalGoedeAntwoorden + "/" + minCorrect);
+            System.out.println("Helaas , u bent gezakt voor het examen : " + naam);
+            return false;
+        }
     }
 }

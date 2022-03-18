@@ -108,11 +108,8 @@ class Main {
                     break;
                 case 5:
                     System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
-                    int examenNummer = 1;
-                    for (Examen k : examens){
-                        System.out.println(examenNummer + "." + k.getNaam());
-                        examenNummer++;
-                    }
+                    showExams(examens);
+
                     int l = scanner.nextInt();
 
                     switch (l) {
@@ -122,7 +119,8 @@ class Main {
                             break;
                         case 2:
                             examen2.examen2();
-                            examen2.maakExamen();
+                            examen2.checkVoldoende(examen2.maakExamen());
+
                             break;
                     }
                 case 6:
@@ -264,7 +262,7 @@ class Main {
             System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
         }
     }
-
+    
     public static void showStudents(ArrayList<Student> studenten) {
         for (int i = 0; i < studenten.size(); i++) {
             System.out.println(
