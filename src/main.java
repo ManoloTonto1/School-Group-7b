@@ -259,7 +259,7 @@ class Main {
 
     public static void showExams(ArrayList<Examen> examens) {
         for (int i = 0; i < examens.size(); i++) {
-            System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
+            System.out.println("Examen " + (i + 1) + ": " + examens.get(i).getNaam());
         }
     }
     
