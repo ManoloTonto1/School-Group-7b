@@ -24,6 +24,7 @@ class Main {
         examens.add(new Examen("Higher Lower"));
         Examen examen1 = new Examen("Topo Toets", 6);
         Examen examen2 = new Examen("Higher Lower", 6);
+        Student student = null;
         LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
@@ -65,7 +66,7 @@ class Main {
                     break;
                 case 3:
                     System.out.println("===========================");
-                    Student student = RegisterStudent();
+                     student = RegisterStudent();
                     boolean studentAlreadyExists = false;
 
 
@@ -107,20 +108,24 @@ class Main {
 
                     break;
                 case 5:
+                    System.out.println("Welkom " + student.getNaam());
                     System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
                     showExams(examens);
-
+                    ArrayList<String> gehaaldeExamens = new ArrayList<>();
                     int l = scanner.nextInt();
 
                     switch (l) {
                         case 1:
                             examen1.examen1();
-                            examen1.maakExamen();
+                            examen1.checkVoldoende(examen1.maakExamen());
                             break;
                         case 2:
                             examen2.examen2();
-                            examen2.checkVoldoende(examen2.maakExamen());
-
+                            if (examen2.checkVoldoende(examen2.maakExamen())){
+                                gehaaldeExamens.add(examen2.getNaam());
+                                student.setGehaaldeExamens(gehaaldeExamens);
+                            }
+                            System.out.println(student.getGehaaldeExamens());
                             break;
                     }
                 case 6:
