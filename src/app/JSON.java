@@ -1,3 +1,4 @@
+package app;
 //imoprt java natives
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -10,6 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 public class JSON {
+
+   
 
     @SuppressWarnings("unchecked")
     public ArrayList<Student> LoadStudents(ArrayList<Student> studenten) {
@@ -53,7 +56,7 @@ public class JSON {
     }
 
     @SuppressWarnings("unchecked")
-    public void saveStudents(ArrayList<Student> studenten) {
+    public boolean saveStudents(ArrayList<Student> studenten) {
         // create the JSON object where we will store the data from the Array list
         JSONObject root = new JSONObject();
         JSONObject students = new JSONObject();
@@ -85,8 +88,10 @@ public class JSON {
             file.write(root.toJSONString());
             file.flush();
             System.out.println("Successfully saved File.");
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

@@ -1,12 +1,8 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+package app;
+
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
-
-
 
 
 class Main {
@@ -82,7 +78,7 @@ class Main {
                 showStudentMostExams(studenten);
 
                     break;
-                 default:
+                default:
                     System.out.println("[!] Invalid input");
                     break;
             }
