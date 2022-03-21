@@ -15,7 +15,9 @@ class Main {
         ArrayList<Student> studenten = new ArrayList<Student>();
         ArrayList<Examen> examens = new ArrayList<>();
         examens.add(new Examen("Java"));
+
         json.LoadStudents(studenten);
+
 
         Scanner scanner = new Scanner(System.in);
         int x = 1;
@@ -67,10 +69,10 @@ class Main {
 
                     break;
                 case 6:
-
+                    hasStudentPassedExam(studenten);
                     break;
                 case 7:
-
+                    showStudentExams(studenten);
                     break;
                 case 8:
                 showStudentMostExams(studenten);
@@ -83,7 +85,6 @@ class Main {
         }
     }
 
-    
     public static void RegisterStudent(ArrayList<Student> studenten) {
 
         // Functie aanroepen om een Student object aan te maken
@@ -180,9 +181,58 @@ class Main {
     public static void showStudents(ArrayList<Student> studenten) {
         for (int i = 0; i < studenten.size(); i++) {
             System.out.println(
-                    "student " + i + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
+                    "student " + (i+1) + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
         }
 
     }
+    public static void showStudentExams(ArrayList<Student> studenten) {
+        System.out.println("Welke student wilt u opzoeken?");
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+
+        for (int i = 0; i < studenten.size(); i++) {
+            if(input.equals(studenten.get(i).getNaam())) {
+                int examsAmount = studenten.get(i).getGehaaldeExamens().size();
+                if (examsAmount > 0) {
+                    for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
+                        System.out.println("Examen " + (j+1) + ": " + studenten.get(i).getGehaaldeExamens().get(j));
+                    }
+                } else {
+                    System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+                }
+            }
+        }
+    }
+    public static void hasStudentPassedExam(ArrayList<Student> studenten){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welke student wilt u opzoeken?");
+        String studentInput = scanner.nextLine();
+
+
+        System.out.println("Welk examen wilt u opzoeken?");
+        String examenInput = scanner.nextLine();
+        Boolean geslaagd = false;
+        for (int i = 0; i < studenten.size(); i++) {
+            if(studentInput.equals(studenten.get(i).getNaam())) {
+                int examsAmount = studenten.get(i).getGehaaldeExamens().size();
+                if (examsAmount > 0) {
+                    for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
+                        if(examenInput.equals(studenten.get(i).getGehaaldeExamens().get(j))) {
+                            System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft het examen: " + examenInput + " gehaald");
+                            geslaagd = true;
+                        }
+                    }
+                } else {
+                    System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+
+                }
+            }
+        }
+        if (!geslaagd) {
+            System.out.println("Student met de naam: " + studentInput + " heeft het examen: " + examenInput + " niet gehaald");
+        }
+    }
+
 
 }

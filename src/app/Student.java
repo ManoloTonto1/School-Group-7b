@@ -2,7 +2,6 @@ package app;
 import java.util.ArrayList;
 
 public class Student {
-    Examen examens;
     private String naam;
     private Integer studentNummer;
 

@@ -1,1 +1,11 @@
-{}
+{
+"123456": {
+    "naam": "Manolo Lopez",
+    "studentNummer": 123456,
+    "gehaaldeExamens": [
+        "scheikunde",
+        "wiskunde",
+        "biologie"
+    ]
+}
+}
