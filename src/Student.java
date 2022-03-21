@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 
 public class Student {
-    Examen examens;
     private String naam;
     private int studentNummer;
-
     private ArrayList<String> gehaaldeExamens;
 
     public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
