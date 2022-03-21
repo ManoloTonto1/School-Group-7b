@@ -69,7 +69,16 @@ class Main {
 
                     break;
                 case 5:
+                    System.out.println("===========================");
+                    
+                    // Eerst moet er ingelogd worden voordat een examen wordt afgenomen
+                    LoginManager session = new LoginManager();
 
+                    if(session.Login(studenten)) {
+                        System.out.println("[i] Login successful");
+                    }
+
+                    System.out.println("===========================");
                     break;
                 case 6:
 
