@@ -5,7 +5,7 @@ Dit project behoort bij deze studenten in de haagse hogeschool
 *Akasha Wilms[18104355]
 Demy van Aanhout [21153132] 
 Martijn Gelton [21104689] 
-Layton Overdikk [21121788] 
+Layton Overdijk [21121788] 
 Mitchell Ekelschot [21137935]
 Manuel Lopez [20087500]*
 
