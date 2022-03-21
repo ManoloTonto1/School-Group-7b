@@ -1,3 +1,4 @@
+package app;
 public class Vraag {
     private String antwoord_A;
     private String antwoord_B;

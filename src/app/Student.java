@@ -1,14 +1,17 @@
+package app;
 import java.util.ArrayList;
 
 public class Student {
     Examen examens;
     private String naam;
-    private int studentNummer;
+    private Integer studentNummer;
 
     private ArrayList<String> gehaaldeExamens;
 
-    public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
+    public Student(String naam, Integer studentNummer, ArrayList<String> gehaaldeExamens){
         this.naam = naam;
+        this.studentNummer = studentNummer;
+        this.gehaaldeExamens = gehaaldeExamens;
     }
     public Student(Integer studentNummer){
         this.studentNummer= studentNummer;
