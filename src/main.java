@@ -110,23 +110,24 @@ class Main {
                 case 5:
                     System.out.println("Welkom " + student.getNaam());
                     System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
+
                     showExams(examens);
-                    ArrayList<String> gehaaldeExamens = new ArrayList<>();
+
+
                     int l = scanner.nextInt();
 
                     switch (l) {
-                        case 1:
+                        case 1 -> {
                             examen1.examen1();
                             examen1.checkVoldoende(examen1.maakExamen());
-                            break;
-                        case 2:
+                        }
+                        case 2 -> {
                             examen2.examen2();
-                            if (examen2.checkVoldoende(examen2.maakExamen())){
-                                gehaaldeExamens.add(examen2.getNaam());
-                                student.setGehaaldeExamens(gehaaldeExamens);
+                           // examen2.checkVoldoende(examen2.maakExamen())
+                            if (true) {
+                                student.addGehaaldeExamen(examen2.getNaam());
                             }
-                            System.out.println(student.getGehaaldeExamens());
-                            break;
+                        }
                     }
                 case 6:
 
