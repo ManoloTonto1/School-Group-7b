@@ -8,10 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 //import JSON
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+//import org.json.simple.JSONArray;
+//import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
 
 class Main {
     // create main method
@@ -20,6 +20,8 @@ class Main {
         ArrayList<Student> studenten = new ArrayList<Student>();
         ArrayList<Examen> examens = new ArrayList<>();
         examens.add(new Examen("Java"));
+
+    
         LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
@@ -128,6 +130,7 @@ class Main {
         return studenten;
 
     }
+    
 
     @SuppressWarnings("unchecked")
     public static void saveStudents(ArrayList<Student> studenten) {
@@ -266,6 +269,26 @@ class Main {
                     "student " + i + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
         }
 
+    }
+
+    public static void showStudentExams(ArrayList<Student> studenten) {
+        System.out.println("Welke student wilt u opzoeken?");
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+
+        for (int i = 0; i < studenten.size(); i++) {
+            if(input.equals(studenten.get(i).getNaam())) {
+                int examsAmount = studenten.get(i).getGehaaldeExamens().size();
+                if (examsAmount > 0) {
+                    for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
+                        System.out.println("Examen " + j + ": " + studenten.get(i).getGehaaldeExamens().get(j));
+                    }
+                } else {
+                    System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examnes gehaald.");
+                }
+            }
+        }
     }
 
 }
