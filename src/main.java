@@ -20,11 +20,7 @@ class Main {
         // Start any objects now like the loading from shit.
         ArrayList<Student> studenten = new ArrayList<Student>();
         ArrayList<Examen> examens = new ArrayList<>();
-        examens.add(new Examen("Topo Toets"));
-        examens.add(new Examen("Higher Lower"));
-        Examen examen1 = new Examen("Topo Toets", 6);
-        Examen examen2 = new Examen("Higher Lower", 6);
-        Student student = null;
+        
         LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
@@ -127,6 +123,7 @@ class Main {
                                 student.addGehaaldeExamen(examen2.getNaam());
                         }
                     }
+                    break;
                 case 6:
 
                     break;

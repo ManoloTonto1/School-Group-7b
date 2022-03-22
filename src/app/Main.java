@@ -4,20 +4,25 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 class Main {
     public static JSON json = new JSON();
 
     // create main method
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
-        
+
         ArrayList<Student> studenten = new ArrayList<Student>();
         ArrayList<Examen> examens = new ArrayList<>();
         examens.add(new Examen("Java"));
-
+        //Demy files
+        examens.add(new Examen("Topo Toets"));
+        examens.add(new Examen("Higher Lower"));
+        Examen examen1 = new Examen("Topo Toets", 6);
+        Examen examen2 = new Examen("Higher Lower", 6);
+        Student student = null;
+        //
+        //
         json.LoadStudents(studenten);
-
 
         Scanner scanner = new Scanner(System.in);
         int x = 1;
@@ -52,7 +57,7 @@ class Main {
                     break;
                 case 2:
                     System.out.println("===========================");
-                    //studenten.forEach(student -> System.out.println(student.getNaam()));
+                    // studenten.forEach(student -> System.out.println(student.getNaam()));
                     showStudents(studenten);
                     System.out.println("===========================");
                     break;
@@ -66,7 +71,24 @@ class Main {
 
                     break;
                 case 5:
+                    System.out.println("Welkom " + student.getNaam());
+                    System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
 
+                    showExams(examens);
+
+                    int l = scanner.nextInt();
+
+                    switch (l) {
+                        case 1 -> {
+                            examen1.examen1();
+                            examen1.checkVoldoende(examen1.maakExamen());
+                        }
+                        case 2 -> {
+                            examen2.examen2();
+                            // examen2.checkVoldoende(examen2.maakExamen())
+                            student.addGehaaldeExamen(examen2.getNaam());
+                        }
+                    }
                     break;
                 case 6:
                     hasStudentPassedExam(studenten);
@@ -75,7 +97,7 @@ class Main {
                     showStudentExams(studenten);
                     break;
                 case 8:
-                showStudentMostExams(studenten);
+                    showStudentMostExams(studenten);
 
                     break;
                 default:
@@ -96,38 +118,38 @@ class Main {
         int studentNumberLimit = 8;
         boolean studentNumberOverLimit = false;
 
-            // For loop om alle objecten in de arraylist 'studenten' te vergelijken met het nieuwe student object
-            for (Student _student : studenten) {
+        // For loop om alle objecten in de arraylist 'studenten' te vergelijken met het
+        // nieuwe student object
+        for (Student _student : studenten) {
 
-                // Checkt of het studentnummer overeen komt
-                if (_student.getStudentNummer() == student.getStudentNummer()) {
+            // Checkt of het studentnummer overeen komt
+            if (_student.getStudentNummer() == student.getStudentNummer()) {
 
-                    studentAlreadyExists = true;
-                }
-
-                // Checkt of het ingevoerde studentnummer langer is dan 8 cijfers
-                String studentNumberString = ""+student.getStudentNummer()+"";
-                if(studentNumberString.length() > studentNumberLimit) {
-                    studentNumberOverLimit = true;
-                }
+                studentAlreadyExists = true;
             }
-        
-            // Wanneer beide checks onwaar zijn word de student ingeschreven
-            if(!studentAlreadyExists) {
-                if(!studentNumberOverLimit) {
 
-                    studenten.add(student);
-                    System.out.println("[i] Student succesvol ingeschreven.");
-
-                    // Slaat direct de nieuwe array op
-                    json.saveStudents(studenten);
-                } 
-                else {
-                    System.out.println("[!] Student nummer heeft te veel characters.");
-                    
-                }
+            // Checkt of het ingevoerde studentnummer langer is dan 8 cijfers
+            String studentNumberString = "" + student.getStudentNummer() + "";
+            if (studentNumberString.length() > studentNumberLimit) {
+                studentNumberOverLimit = true;
             }
-                    
+        }
+
+        // Wanneer beide checks onwaar zijn word de student ingeschreven
+        if (!studentAlreadyExists) {
+            if (!studentNumberOverLimit) {
+
+                studenten.add(student);
+                System.out.println("[i] Student succesvol ingeschreven.");
+
+                // Slaat direct de nieuwe array op
+                json.saveStudents(studenten);
+            } else {
+                System.out.println("[!] Student nummer heeft te veel characters.");
+
+            }
+        }
+
     }
 
     public static Student CreateStudent() {
@@ -181,10 +203,12 @@ class Main {
     public static void showStudents(ArrayList<Student> studenten) {
         for (int i = 0; i < studenten.size(); i++) {
             System.out.println(
-                    "student " + (i+1) + ": " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer());
+                    "student " + (i + 1) + ": " + studenten.get(i).getNaam() + " - "
+                            + studenten.get(i).getStudentNummer());
         }
 
     }
+
     public static void showStudentExams(ArrayList<Student> studenten) {
         System.out.println("Welke student wilt u opzoeken?");
         Scanner scanner = new Scanner(System.in);
@@ -192,47 +216,50 @@ class Main {
         String input = scanner.nextLine();
 
         for (int i = 0; i < studenten.size(); i++) {
-            if(input.equals(studenten.get(i).getNaam())) {
+            if (input.equals(studenten.get(i).getNaam())) {
                 int examsAmount = studenten.get(i).getGehaaldeExamens().size();
                 if (examsAmount > 0) {
                     for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
-                        System.out.println("Examen " + (j+1) + ": " + studenten.get(i).getGehaaldeExamens().get(j));
+                        System.out.println("Examen " + (j + 1) + ": " + studenten.get(i).getGehaaldeExamens().get(j));
                     }
                 } else {
-                    System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+                    System.out.println(
+                            "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
                 }
             }
         }
     }
-    public static void hasStudentPassedExam(ArrayList<Student> studenten){
+
+    public static void hasStudentPassedExam(ArrayList<Student> studenten) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welke student wilt u opzoeken?");
         String studentInput = scanner.nextLine();
-
 
         System.out.println("Welk examen wilt u opzoeken?");
         String examenInput = scanner.nextLine();
         Boolean geslaagd = false;
         for (int i = 0; i < studenten.size(); i++) {
-            if(studentInput.equals(studenten.get(i).getNaam())) {
+            if (studentInput.equals(studenten.get(i).getNaam())) {
                 int examsAmount = studenten.get(i).getGehaaldeExamens().size();
                 if (examsAmount > 0) {
                     for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
-                        if(examenInput.equals(studenten.get(i).getGehaaldeExamens().get(j))) {
-                            System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft het examen: " + examenInput + " gehaald");
+                        if (examenInput.equals(studenten.get(i).getGehaaldeExamens().get(j))) {
+                            System.out.println("Student met de naam: " + studenten.get(i).getNaam()
+                                    + " heeft het examen: " + examenInput + " gehaald");
                             geslaagd = true;
                         }
                     }
                 } else {
-                    System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+                    System.out.println(
+                            "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
 
                 }
             }
         }
         if (!geslaagd) {
-            System.out.println("Student met de naam: " + studentInput + " heeft het examen: " + examenInput + " niet gehaald");
+            System.out.println(
+                    "Student met de naam: " + studentInput + " heeft het examen: " + examenInput + " niet gehaald");
         }
     }
-
 
 }
