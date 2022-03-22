@@ -55,10 +55,11 @@ public class Examen {
 
     public int maakExamen(){
         int vragenGoedBeantwoord = 0;
+        int vraagNummer = 1;
         Scanner sc = new Scanner(System.in);
         Collections.shuffle(vragen);
         for (Vraag i : vragen){
-            System.out.println(i.getVraagStelling());
+            System.out.println("Vraag  " + vraagNummer + ": "+ i.getVraagStelling());
             System.out.println("A: " + i.getAntwoord_A());
             System.out.println("B: " + i.getAntwoord_B());
             System.out.print("Vul uw antwoord in : ");
