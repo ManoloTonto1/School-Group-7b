@@ -12,6 +12,8 @@ import org.junit.Test;
 
 public class JSONMenuTest {
 
+
+    // Unit tests doe not really read the JSON file, it just checks if the JSON file is being read correctly and it already returns an array when in normal use. so i cannot return a tur or false statement
     @Test
     public void testRead() {
         ArrayList<Student> studenten = new ArrayList<>();

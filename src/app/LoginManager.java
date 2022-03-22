@@ -16,17 +16,18 @@ public class LoginManager {
         boolean loginSucces = false;
 
         for (Student student : students) {
-            if(studentNummer == student.getStudentNummer()) {
+            if (studentNummer == student.getStudentNummer()) {
                 setStudent(student);
                 loginSucces = true;
             }
         }
 
-        if(loginSucces) {
-            System.out.println("[i] Ingelogd als: "+studentLoggedIn.getNaam()+" ("+studentLoggedIn.getStudentNummer()+")");
+        if (loginSucces) {
+            System.out.println(
+                    "[i] Ingelogd als: " + studentLoggedIn.getNaam() + " (" + studentLoggedIn.getStudentNummer() + ")");
             return true;
         } else {
-            System.out.println("[!] Studentnummer '"+studentNummer+"' niet gevonden.");
+            System.out.println("[!] Studentnummer '" + studentNummer + "' niet gevonden.");
             return false;
         }
     }

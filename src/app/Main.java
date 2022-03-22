@@ -14,7 +14,7 @@ class Main {
         ArrayList<Student> studenten = new ArrayList<Student>();
         ArrayList<Examen> examens = new ArrayList<>();
         examens.add(new Examen("Java"));
-        //Demy files
+        // Demy files
         examens.add(new Examen("Topo Toets"));
         examens.add(new Examen("Higher Lower"));
         Examen examen1 = new Examen("Topo Toets", 6);
