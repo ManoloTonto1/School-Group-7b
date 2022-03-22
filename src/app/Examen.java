@@ -1,5 +1,6 @@
 package app;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Examen {
@@ -54,7 +55,8 @@ public class Examen {
 
     public int maakExamen(){
         int vragenGoedBeantwoord = 0;
-         Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        Collections.shuffle(vragen);
         for (Vraag i : vragen){
             System.out.println(i.getVraagStelling());
             System.out.println("A: " + i.getAntwoord_A());
