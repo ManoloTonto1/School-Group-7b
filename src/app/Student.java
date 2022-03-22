@@ -5,7 +5,7 @@ public class Student {
     private String naam;
     private Integer studentNummer;
 
-    private ArrayList<String> gehaaldeExamens;
+    private ArrayList<String> gehaaldeExamens = new ArrayList<>();
 
     public Student(String naam, Integer studentNummer, ArrayList<String> gehaaldeExamens){
         this.naam = naam;
@@ -15,10 +15,11 @@ public class Student {
     public Student(Integer studentNummer){
         this.studentNummer= studentNummer;
     }
-    //Getters
-    public void addGehaaldeExamen(Examen examens){
 
+    public void addGehaaldeExamen(String naamGehaaldeExamen){
+        gehaaldeExamens.add(naamGehaaldeExamen);
     }
+
     //Getters
     public String getNaam() {
         return naam;
