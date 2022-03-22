@@ -24,6 +24,7 @@ class Main {
         examens.add(new Examen("Higher Lower"));
         Examen examen1 = new Examen("Topo Toets", 6);
         Examen examen2 = new Examen("Higher Lower", 6);
+        Student student = null;
         LoadStudents(studenten);
 
         Scanner scanner = new Scanner(System.in);
@@ -65,7 +66,7 @@ class Main {
                     break;
                 case 3:
                     System.out.println("===========================");
-                    Student student = RegisterStudent();
+                     student = RegisterStudent();
                     boolean studentAlreadyExists = false;
 
 
@@ -107,21 +108,24 @@ class Main {
 
                     break;
                 case 5:
+                    System.out.println("Welkom " + student.getNaam());
                     System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
+
                     showExams(examens);
+
 
                     int l = scanner.nextInt();
 
                     switch (l) {
-                        case 1:
+                        case 1 -> {
                             examen1.examen1();
-                            examen1.maakExamen();
-                            break;
-                        case 2:
+                            examen1.checkVoldoende(examen1.maakExamen());
+                        }
+                        case 2 -> {
                             examen2.examen2();
-                            examen2.checkVoldoende(examen2.maakExamen());
-
-                            break;
+                           // examen2.checkVoldoende(examen2.maakExamen())
+                                student.addGehaaldeExamen(examen2.getNaam());
+                        }
                     }
                 case 6:
 
@@ -259,7 +263,7 @@ class Main {
 
     public static void showExams(ArrayList<Examen> examens) {
         for (int i = 0; i < examens.size(); i++) {
-            System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
+            System.out.println("Examen " + (i + 1) + ": " + examens.get(i).getNaam());
         }
     }
     

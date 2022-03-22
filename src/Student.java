@@ -5,20 +5,21 @@ public class Student {
     private String naam;
     private int studentNummer;
 
-    private ArrayList<String> gehaaldeExamens;
+    private ArrayList<String> gehaaldeExamens = new ArrayList<>();
 
-    public Student(String naam, int studentNummer, ArrayList<String> gehaaldeExamens){
+    public Student (String naam, int studentNummer , ArrayList<String>gehaaldeExamens){
         this.naam = naam;
         this.studentNummer=studentNummer;
-        this.gehaaldeExamens=gehaaldeExamens;
+        this.gehaaldeExamens=new ArrayList<>();
     }
     public Student(Integer studentNummer){
         this.studentNummer= studentNummer;
     }
 
-    public void addGehaaldeExamen(Examen examens){
-
+    public void addGehaaldeExamen(String naamGehaaldeExamen){
+        gehaaldeExamens.add(naamGehaaldeExamen);
     }
+
     //Getters
     public String getNaam() {
         return naam;
