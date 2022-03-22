@@ -23,8 +23,8 @@ public class JSONMenuTest {
         "wiskunde",
         "biologie");
         trueOne.add(new Student("Manuel Lopez", 123456, exams));
-        JSON json = new JSON();
-        trueOne= json.LoadStudents(studenten);
+        JSON json = JSON.getInstance();
+        trueOne = json.LoadStudents(studenten);
         assertEquals(trueOne, studenten);
     }
 
@@ -37,7 +37,7 @@ public class JSONMenuTest {
         "wiskunde",
         "biologie");
         trueOne.add(new Student("Manuel Lopez", 123456, exams));
-        JSON json = new JSON();
+        JSON json = JSON.getInstance();
         boolean result = json.saveStudents(studenten);
         assertTrue(result);
     }

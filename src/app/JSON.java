@@ -1,4 +1,5 @@
 package app;
+
 //imoprt java natives
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -10,9 +11,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 public class JSON {
 
-   
+    private JSON() {
+    }
+
+    public static JSON getInstance() {
+        return new JSON();
+    }
 
     @SuppressWarnings("unchecked")
     public ArrayList<Student> LoadStudents(ArrayList<Student> studenten) {
@@ -95,5 +102,4 @@ public class JSON {
         }
     }
 
-    
 }

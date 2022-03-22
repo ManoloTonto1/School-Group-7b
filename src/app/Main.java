@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 class Main {
-    public static JSON json = new JSON();
+    //Import the JSON class for using JSON
+    public static JSON json = JSON.getInstance();
 
     // create main method
     public static void main(String[] args) {
