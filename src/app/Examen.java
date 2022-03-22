@@ -52,20 +52,28 @@ public class Examen {
         return vragen;
     }
 
-    public void maakExamen(ArrayList<Vraag> vragen){
+    public int maakExamen(){
         int vragenGoedBeantwoord = 0;
          Scanner sc = new Scanner(System.in);
         for (Vraag i : vragen){
             System.out.println(i.getVraagStelling());
-            System.out.printf("A: %s" , i.getAntwoord_A());
-            System.out.printf("B: %s" , i.getAntwoord_B());
+            System.out.println("A: " + i.getAntwoord_A());
+            System.out.println("B: " + i.getAntwoord_B());
             System.out.print("Vul uw antwoord in : ");
             if (sc.nextLine().equalsIgnoreCase(i.getCorrectAntwoord())){
                 vragenGoedBeantwoord++;
             }
         }
+        return vragenGoedBeantwoord;
+    }
+    public boolean checkVoldoende(int vragenGoedBeantwoord){
         if (vragenGoedBeantwoord >= minCorrect){
-            //add examen to student
+            System.out.println("Gefeliciteert u bent geslaagd voor het examen : " + getNaam());
+            return true;
+        }
+        else {
+            System.out.println("Helaas u bent gezakt voor het examen : " + getNaam());
+            return false;
         }
     }
 }
