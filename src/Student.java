@@ -4,18 +4,22 @@ public class Student {
     Examen examens;
     private String naam;
     private int studentNummer;
-    private ArrayList<Examen> gehaaldeExamens;
 
-    public Student(String naam, int studentNummer, ArrayList<Examen> gehaaldeExamens){
-        this.naam = naam;
-    }
-    public Student(String naam){
-        this.naam = naam;
-    }
-    //Getters
-    public void addGehaaldeExamen(Examen examens){
+    private ArrayList<String> gehaaldeExamens = new ArrayList<>();
 
+    public Student (String naam, int studentNummer , ArrayList<String>gehaaldeExamens){
+        this.naam = naam;
+        this.studentNummer=studentNummer;
+        this.gehaaldeExamens=new ArrayList<>();
     }
+    public Student(Integer studentNummer){
+        this.studentNummer= studentNummer;
+    }
+
+    public void addGehaaldeExamen(String naamGehaaldeExamen){
+        gehaaldeExamens.add(naamGehaaldeExamen);
+    }
+
     //Getters
     public String getNaam() {
         return naam;
@@ -25,13 +29,18 @@ public class Student {
         return studentNummer;
     }
 
-    public ArrayList<Examen> getGehaaldeExamens() {
+    public ArrayList<String> getGehaaldeExamens() {
         return gehaaldeExamens;
     }
+    
+
 
     //Setters
-    public void setStudentNummer(int studentNummer) {
-        this.studentNummer = studentNummer;
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+    public void setGehaaldeExamens(ArrayList<String> gehaaldeExamens) {
+        this.gehaaldeExamens = gehaaldeExamens;
     }
 
 }

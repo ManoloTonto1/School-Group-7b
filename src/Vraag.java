@@ -1,11 +1,14 @@
 public class Vraag {
     private String antwoord_A;
     private String antwoord_B;
-    private boolean correctAntwoord;
+    private String correctAntwoord;
     private String vraagStelling;
 
-    public Vraag(String antwoord_A, String antwoord_B, boolean correctAntwoord, String vraagStelling){
-
+    public Vraag(String antwoord_A, String antwoord_B, String correctAntwoord, String vraagStelling){
+    this.antwoord_A=antwoord_A;
+    this.antwoord_B=antwoord_B;
+    this.correctAntwoord=correctAntwoord;
+    this.vraagStelling=vraagStelling;
     }
     //Getters
     public String getAntwoord_A() {
@@ -14,7 +17,7 @@ public class Vraag {
     public String getAntwoord_B() {
         return antwoord_B;
     }
-    public boolean getCorrectAntwoord(){
+    public String getCorrectAntwoord(){
         return correctAntwoord;
     }
     public String getVraagStelling(){
