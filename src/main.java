@@ -124,9 +124,7 @@ class Main {
                         case 2 -> {
                             examen2.examen2();
                            // examen2.checkVoldoende(examen2.maakExamen())
-                            if (true) {
                                 student.addGehaaldeExamen(examen2.getNaam());
-                            }
                         }
                     }
                 case 6:
