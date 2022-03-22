@@ -14,6 +14,7 @@ public class Examen {
     public Examen(String naam){
         this.naam = naam;
     }
+
     public void examen1() {
         vragen.add(new Vraag ("Bulgarije", "Servië", "a", "Van welk land is de hoofdstad Sofia?"));
         vragen.add(new Vraag("Europa", "Noord-Amerika", "b", "Tot welk continent hoort Groenland?"));
