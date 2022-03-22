@@ -12,14 +12,13 @@ class Main {
     public static void main(String[] args) {
         // Start any objects now like the loading from shit.
 
-        ArrayList<Student> studenten = new ArrayList<Student>();
         ArrayList<Examen> examens = new ArrayList<>();
         examens.add(new Examen("Java"));
         // Demy files
         examens.add(new Examen("Topo Toets"));
         examens.add(new Examen("Higher Lower"));
-        Examen examen1 = new Examen("Topo Toets", 6);
-        Examen examen2 = new Examen("Higher Lower", 6);
+
+        ArrayList<Student> studenten = new ArrayList<Student>();
         Student student = null;
         //
         //
@@ -72,26 +71,9 @@ class Main {
 
                     break;
                 case 5:
-                    System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
-
-                    showExams(examens);
-
-                    int l = scanner.nextInt();
-
-                    switch (l) {
-                        case 1 -> {
-                            examen1.examen1();
-                            if (examen1.checkVoldoende(examen1.maakExamen())){
-                                student.addGehaaldeExamen(examen1.getNaam());
-                            }
-                        }
-                        case 2 -> {
-                            examen2.examen2();
-                            if (examen2.checkVoldoende(examen2.maakExamen())){
-                                student.addGehaaldeExamen(examen2.getNaam());
-                            }
-                        }
-                    }
+                    System.out.println("===========================");
+                        ExamenAfnemen(studenten, examens);
+                    System.out.println("===========================");
                     break;
                 case 6:
                     hasStudentPassedExam(studenten);
@@ -107,6 +89,42 @@ class Main {
                     System.out.println("[!] Invalid input");
                     break;
             }
+        }
+    }
+
+    public static void ExamenAfnemen(ArrayList<Student> studenten, ArrayList<Examen> examens) {
+
+        Examen examen1 = new Examen("Topo Toets", 6);
+        Examen examen2 = new Examen("Higher Lower", 6);
+
+        LoginManager session = new LoginManager();
+        if(session.Login(studenten)) {
+
+            
+            Scanner examenScanner = new Scanner(System.in);
+            
+            System.out.println("Welk examen wilt u maken? Voer het getal in van het examen:");
+            
+            showExams(examens);
+            
+            int l = examenScanner.nextInt();
+            
+            switch (l) {
+                case 1 -> {
+                    examen1.examen1();
+                    if (examen1.checkVoldoende(examen1.maakExamen())){
+                        session.getStudent().addGehaaldeExamen(examen1.getNaam());
+                    }
+                }
+                case 2 -> {
+                    examen2.examen2();
+                    if (examen2.checkVoldoende(examen2.maakExamen())){
+                        session.getStudent().addGehaaldeExamen(examen2.getNaam());
+                    }
+                }
+            }
+        } else {
+            System.out.println("[!] Login mislukt");
         }
     }
 
