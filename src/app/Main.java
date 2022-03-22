@@ -122,6 +122,8 @@ class Main {
                     }
                 }
             }
+        } else {
+            System.out.println("[!] Login mislukt");
         }
     }
 
