@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
- 
+
 public class Examen {
     private String naam;
     private int minCorrect;
