@@ -3,7 +3,6 @@ package test;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.swing.text.Utilities;
 
 import app.Student;
 import app.Utility;
@@ -24,6 +23,7 @@ public class SearchUtilTest {
         Collections.addAll(exams2, "scheikunde", "wiskunde");
         studenten.add(new Student("Martijn Gelton", 123456, exams));
 
-        assertEquals(studenten.get(0).getNaam(), Utility.showStudentExams(studenten));
+        // assertEquals(studenten.get(0).getNaam(), Utility.showStudentExams(studenten));
+        assertTrue(studenten.get(0).getNaam().equals(Utility.showStudentMostExams(studenten)));
     }
 }
