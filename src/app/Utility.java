@@ -128,7 +128,12 @@ public class Utility {
         Examen examen2 = new Examen("Higher Lower", 6);
 
         LoginManager session = new LoginManager();
-        if(session.Login(studenten)) {
+        Scanner loginScanner = new Scanner(System.in);
+
+        System.out.print("Voer je Studentnummer in: ");
+        int studentNummer = loginScanner.nextInt();
+
+        if(session.Login(studenten, studentNummer)) {
 
             
             Scanner examenScanner = new Scanner(System.in);
