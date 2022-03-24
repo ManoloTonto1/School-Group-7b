@@ -128,7 +128,12 @@ public class Utility {
         Examen examen2 = new Examen("Higher Lower", 6);
 
         LoginManager session = new LoginManager();
-        if(session.Login(studenten)) {
+        Scanner loginScanner = new Scanner(System.in);
+
+        System.out.print("Voer je Studentnummer in: ");
+        int studentNummer = loginScanner.nextInt();
+
+        if(session.Login(studenten, studentNummer)) {
 
             
             Scanner examenScanner = new Scanner(System.in);
@@ -159,15 +164,26 @@ public class Utility {
     }
 
     public static void RegisterStudent(ArrayList<Student> studenten) {
-
+        
         // Functie aanroepen om een Student object aan te maken
         Student student = CreateStudent();
+
+        RegisterStudent(studenten, student);
+    }
+
+    public static boolean RegisterStudent(ArrayList<Student> studenten, Student student) {
 
         // Checks aanmaken
         boolean studentAlreadyExists = false;
 
         int studentNumberLimit = 8;
         boolean studentNumberOverLimit = false;
+
+        // Checkt of het ingevoerde studentnummer langer is dan 8 cijfers
+        String studentNumberString = "" + student.getStudentNummer() + "";
+        if (studentNumberString.length() > studentNumberLimit) {
+            studentNumberOverLimit = true;
+        }
 
         // For loop om alle objecten in de arraylist 'studenten' te vergelijken met het
         // nieuwe student object
@@ -178,12 +194,6 @@ public class Utility {
 
                 studentAlreadyExists = true;
             }
-
-            // Checkt of het ingevoerde studentnummer langer is dan 8 cijfers
-            String studentNumberString = "" + student.getStudentNummer() + "";
-            if (studentNumberString.length() > studentNumberLimit) {
-                studentNumberOverLimit = true;
-            }
         }
 
         // Wanneer beide checks onwaar zijn word de student ingeschreven
@@ -192,13 +202,20 @@ public class Utility {
 
                 studenten.add(student);
                 System.out.println("[i] Student succesvol ingeschreven.");
-
+                
                 // Slaat direct de nieuwe array op
                 json.saveStudents(studenten);
+
+                return true;
             } else {
                 System.out.println("[!] Student nummer heeft te veel characters.");
+                return false;
 
             }
+        } else {
+
+            System.out.println("[!] Student is al ingeschreven.");
+            return false;
         }
 
     }
