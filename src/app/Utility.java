@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import javax.swing.plaf.basic.BasicTreeUI.TreeToggleAction;
+
 
 public class Utility {
     static JSON json = JSON.getInstance();
@@ -263,19 +265,31 @@ public class Utility {
         return null;
     }
 
-    public static void showExams(ArrayList<Examen> examens) {
-        for (int i = 0; i < examens.size(); i++) {
-            System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
+    public static Boolean showExams(ArrayList<Examen> examens) {
+        if(examens.size() > 0) {
+            for (int i = 0; i < examens.size(); i++) {
+                System.out.println("Examen " + i + ": " + examens.get(i).getNaam());
+            }
+            return true;
+        } else {
+            System.out.println("Geen Examens gevonden.");
+            return false;
         }
+        
     }
 
-    public static void showStudents(ArrayList<Student> studenten) {
-        for (int i = 0; i < studenten.size(); i++) {
-            System.out.println(
-                    "student " + (i + 1) + ": " + studenten.get(i).getNaam() + " - "
-                            + studenten.get(i).getStudentNummer());
+    public static Boolean showStudents(ArrayList<Student> studenten) {
+        if(studenten.size() > 0) {
+            for (int i = 0; i < studenten.size(); i++) {
+                System.out.println(
+                        "student " + (i + 1) + ": " + studenten.get(i).getNaam() + " - "
+                                + studenten.get(i).getStudentNummer());
+            }
+            return true;
+        } else {
+            System.out.println("Geen Studenten gevonden.");
+            return false;
         }
-
     }
 
     public static void showStudentExams(ArrayList<Student> studenten) {
