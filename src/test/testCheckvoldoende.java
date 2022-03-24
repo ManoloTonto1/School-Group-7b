@@ -9,9 +9,33 @@ public class testCheckvoldoende {
 
 
     @Test
-    public void testCheckVoldoende(){
-    Examen examen = new Examen("testExamen", 2);
-    assertTrue(examen.checkVoldoende(2));
-    assertFalse(examen.checkVoldoende(0));
+    public void test_CheckVoldoende_True(){
+        //Arrange
+
+        Examen examen = new Examen("testExamen", 6);
+
+        //Act
+
+        boolean result = examen.checkVoldoende(10);
+
+        //Assert
+        assertTrue(result);
+
+
     }
+    @Test
+    public void test_CheckVoldoende_False(){
+        //Arrange
+
+        Examen examen = new Examen("testExamen", 6);
+
+        //Act
+
+        boolean result = examen.checkVoldoende(1);
+        //Assert
+        assertFalse(result);
+
+    }
+
 }
+
