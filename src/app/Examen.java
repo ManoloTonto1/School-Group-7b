@@ -17,7 +17,7 @@ public class Examen {
     }
 
     public void examen1() {
-        vragen.add(new Vraag("Bulgarije", "Servië", "a", "Van welk land is de hoofdstad Sofia?"));
+        vragen.add(new Vraag ("Bulgarije", "Servië", "a", "Van welk land is de hoofdstad Sofia?"));
         vragen.add(new Vraag("Europa", "Noord-Amerika", "b", "Tot welk continent hoort Groenland?"));
         vragen.add(new Vraag("Ja", "Nee", "a", "Is er een land met de naam Chad?"));
         vragen.add(new Vraag("Pangea", "Eritrea", "a", "Hoe heet het supercontinent ongeveer 230 miljoen jaar geleden?"));
@@ -55,11 +55,10 @@ public class Examen {
 
     public int maakExamen(){
         int vragenGoedBeantwoord = 0;
-        int vraagNummer = 1;
         Scanner sc = new Scanner(System.in);
         Collections.shuffle(vragen);
         for (Vraag i : vragen){
-            System.out.println("Vraag  " + vraagNummer + ": "+ i.getVraagStelling());
+            System.out.println(i.getVraagStelling());
             System.out.println("A: " + i.getAntwoord_A());
             System.out.println("B: " + i.getAntwoord_B());
             System.out.print("Vul uw antwoord in : ");

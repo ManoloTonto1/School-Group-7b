@@ -278,7 +278,7 @@ public class Utility {
         int max = (int) Collections.max(studentExams);
         for (int i = 0; i < studenten.size(); i++) {
             if (studenten.get(i).getGehaaldeExamens().size() == max) {
-                System.out.println("Meeste examens gehaald: " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer() + "aantal gehaalde examens: " + max);
+                System.out.println("Meeste examens gehaald: " + studenten.get(i).getNaam() + " - " + studenten.get(i).getStudentNummer() + " - aantal gehaalde examens: " + max);
                 return studenten.get(i).getNaam();
             }
         }
