@@ -1,6 +1,8 @@
 package test;
 
 import java.beans.Transient;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -55,5 +57,20 @@ public class SearchUtilTest {
 
         assertTrue(Utility.showStudents(studenten));
         assertEquals(Utility.showStudents(studenten2), false);
+    }
+
+    @Test
+    public void testStudentPassedExams() {
+        ArrayList<Student> studenten = new ArrayList<>();
+        ArrayList<String> exams = new ArrayList<>();
+        Collections.addAll(exams, "scheikunde", "wiskunde", "biologie");
+        studenten.add(new Student("Manuel Lopez", 123456, exams));
+
+        ArrayList<String> exams2 = new ArrayList<>();
+        Collections.addAll(exams2, "scheikunde", "wiskunde");
+        studenten.add(new Student("Martijn Gelton", 123456, exams2));
+    
+        assertFalse(Utility.hasStudentPassedExam(studenten, "Martijn Gelton", "biologie"));
+        assertTrue(Utility.hasStudentPassedExam(studenten, "Manuel Lopez", "biologie"));
     }
 }

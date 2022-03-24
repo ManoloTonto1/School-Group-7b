@@ -313,7 +313,7 @@ public class Utility {
         }
     }
 
-    public static void hasStudentPassedExam(ArrayList<Student> studenten) {
+    public static boolean hasStudentPassedExam(ArrayList<Student> studenten) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welke student wilt u opzoeken?");
         String studentInput = scanner.nextLine();
@@ -335,7 +335,6 @@ public class Utility {
                 } else {
                     System.out.println(
                             "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
-
                 }
             }
         }
@@ -343,6 +342,38 @@ public class Utility {
             System.out.println(
                     "Student met de naam: " + studentInput + " heeft het examen: " + examenInput + " niet gehaald");
         }
+        return geslaagd;
+    }
+
+    public static boolean hasStudentPassedExam(ArrayList<Student> studenten, String input1, String input2) {
+        System.out.println("Welke student wilt u opzoeken?");
+        String studentInput = input1;
+
+        System.out.println("Welk examen wilt u opzoeken?");
+        String examenInput = input2;
+        Boolean geslaagd = false;
+        for (int i = 0; i < studenten.size(); i++) {
+            if (studentInput.equals(studenten.get(i).getNaam())) {
+                int examsAmount = studenten.get(i).getGehaaldeExamens().size();
+                if (examsAmount > 0) {
+                    for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
+                        if (examenInput.equals(studenten.get(i).getGehaaldeExamens().get(j))) {
+                            System.out.println("Student met de naam: " + studenten.get(i).getNaam()
+                                    + " heeft het examen: " + examenInput + " gehaald");
+                            geslaagd = true;
+                        }
+                    }
+                } else {
+                    System.out.println(
+                            "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+                }
+            }
+        }
+        if (!geslaagd) {
+            System.out.println(
+                    "Student met de naam: " + studentInput + " heeft het examen: " + examenInput + " niet gehaald");
+        }
+        return geslaagd;
     }
 
     
