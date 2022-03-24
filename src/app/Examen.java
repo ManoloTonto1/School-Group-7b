@@ -56,7 +56,7 @@ public class Examen {
     public int maakExamen(){
         int vragenGoedBeantwoord = 0;
         Scanner sc = new Scanner(System.in);
-        Collections.shuffle(vragen);
+        
         for (Vraag i : vragen){
             System.out.println(i.getVraagStelling());
             System.out.println("A: " + i.getAntwoord_A());
@@ -78,6 +78,7 @@ public class Examen {
             return false;
         }
     }
+<<<<<<< Updated upstream
     //TEST
     public int maakExamen(ArrayList<String> antwoorden){
         int vragenGoedBeantwoord = 0;
@@ -93,6 +94,20 @@ public class Examen {
                 vragenGoedBeantwoord++;
             }
 
+=======
+    public int maakExamen(ArrayList<String> antwoorden){
+        int vragenGoedBeantwoord = 0;
+        Scanner sc = new Scanner(System.in);
+
+        for (Vraag i : vragen){
+            System.out.println(i.getVraagStelling());
+            System.out.println("A: " + i.getAntwoord_A());
+            System.out.println("B: " + i.getAntwoord_B());
+            System.out.print("Vul uw antwoord in : ");
+            if (sc.nextLine().equalsIgnoreCase(i.getCorrectAntwoord())){
+                vragenGoedBeantwoord++;
+            }
+>>>>>>> Stashed changes
         }
         return vragenGoedBeantwoord;
     }

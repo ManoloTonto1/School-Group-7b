@@ -166,25 +166,33 @@ public class Utility {
             showExams(examens);
             
             int l = examenScanner.nextInt();
-            
+
             switch (l) {
                 case 1 -> {
                     examen1.examen1();
                     if (examen1.checkVoldoende(examen1.maakExamen())){
-                        session.getStudent().addGehaaldeExamen(examen1.getNaam());
-                        json.saveStudents(studenten);
+                        if(!session.getStudent().getGehaaldeExamens().contains(examen1.getNaam())){
+                            session.getStudent().addGehaaldeExamen(examen1.getNaam());
+                            json.saveStudents(studenten);
+                        }
+
                     }
                 }
                 case 2 -> {
                     examen2.examen2();
                     if (examen2.checkVoldoende(examen2.maakExamen())){
-                        session.getStudent().addGehaaldeExamen(examen2.getNaam());
-                        json.saveStudents(studenten);
+
+                        if(!session.getStudent().getGehaaldeExamens().contains(examen2.getNaam())){
+                            session.getStudent().addGehaaldeExamen(examen2.getNaam());
+                            json.saveStudents(studenten);
+                        }
                     }
                 }
             }
-        } else {
+        }
+        else {
             System.out.println("[!] Login mislukt");
+
         }
     }
 
