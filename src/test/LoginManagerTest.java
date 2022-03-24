@@ -9,7 +9,7 @@ import org.junit.Test;
 public class LoginManagerTest {
 
     @Test
-    public void CheckIfLoginReturnsTrueWithCorrectCredentials() {
+    public void LoginManager_LoginCorrectCredentials_ExpectTrue() {
         
         // Array aanmaken
         ArrayList<Student> studenten = new ArrayList<>();
@@ -27,7 +27,7 @@ public class LoginManagerTest {
     }
 
     @Test
-    public void CheckIfLoginReturnsFalseWithIncorrectCredentials() {
+    public void LoginManager_LoginIncorrectCredentials_ExpectFalse() {
         
         // Array aanmaken
         ArrayList<Student> studenten = new ArrayList<>();
@@ -43,7 +43,7 @@ public class LoginManagerTest {
     }
 
     @Test
-    public void CheckIfLoginReturnsFalseIfStudentsIsEmpty() {
+    public void LoginManager_LoginWhenNoStudentsExist_ExpectFalse() {
 
         // Array aanmaken
         ArrayList<Student> studenten = new ArrayList<>();
@@ -59,7 +59,7 @@ public class LoginManagerTest {
     }
 
     @Test
-    public void TestIfGetStudentMethodReturnsStudentIfNotLoggedIn() {
+    public void LoginManager_GetStudentWhenNotLoggedIn_ExpectNull() {
         LoginManager manager = new LoginManager();
 
         // Checkt of er een student is ingelogd en kan dus geen Student object terug geven
@@ -67,7 +67,7 @@ public class LoginManagerTest {
     }
 
     @Test
-    public void TestIfGetStudentMethodReturnsStudentIfLoggedIn() {
+    public void LoginManager_GetStudentWhenLoggedIn_ExpectTrue() {
 
         // Array aanmaken
         ArrayList<Student> studenten = new ArrayList<>();
