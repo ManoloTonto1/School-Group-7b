@@ -172,12 +172,14 @@ public class Utility {
                     examen1.examen1();
                     if (examen1.checkVoldoende(examen1.maakExamen())){
                         session.getStudent().addGehaaldeExamen(examen1.getNaam());
+                        json.saveStudents(studenten);
                     }
                 }
                 case 2 -> {
                     examen2.examen2();
                     if (examen2.checkVoldoende(examen2.maakExamen())){
                         session.getStudent().addGehaaldeExamen(examen2.getNaam());
+                        json.saveStudents(studenten);
                     }
                 }
             }
