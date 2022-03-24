@@ -33,8 +33,8 @@ public class Utility {
             return false;
         }
 
+        System.out.println("[i] Student "+studenten.get((choice-1)).getNaam()+" verwijderd.");
         studenten.remove((choice-1));
-        System.out.println("[i] Student verwijderd.");
         json.saveStudents(studenten);
         return true;
     }
@@ -54,7 +54,8 @@ public class Utility {
         }
 
         studenten.remove((choice-1));
-        System.out.println("[i] Student verwijderd.");
+        System.out.println("[i] Student "+studenten.get(choice-1).getNaam()+" verwijderd.");
+        
         json.saveStudents(studenten);
         return true;
     }
