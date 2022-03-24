@@ -17,7 +17,7 @@ public class Examen {
     }
 
     public void examen1() {
-        vragen.add(new Vraag ("Bulgarije", "Servië", "a", "Van welk land is de hoofdstad Sofia?"));
+        vragen.add(new Vraag("Bulgarije", "Servië", "a", "Van welk land is de hoofdstad Sofia?"));
         vragen.add(new Vraag("Europa", "Noord-Amerika", "b", "Tot welk continent hoort Groenland?"));
         vragen.add(new Vraag("Ja", "Nee", "a", "Is er een land met de naam Chad?"));
         vragen.add(new Vraag("Pangea", "Eritrea", "a", "Hoe heet het supercontinent ongeveer 230 miljoen jaar geleden?"));
