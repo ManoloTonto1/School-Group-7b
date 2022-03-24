@@ -11,7 +11,7 @@ public class RegisterStudentTest {
 
     // Test om te checken of de student kan worden toegevoegd in de ArrayList
     @Test
-    public void CheckIfStudentGetsAdded () {
+    public void RegisterStudent_NewStudent_ExpectTrue () {
 
         // Nieuwe student array aanmaken voor het testen
         ArrayList<Student> studenten = new ArrayList<>();
@@ -27,7 +27,7 @@ public class RegisterStudentTest {
     }
 
     @Test
-    public void CheckIfStudentGetsAddedWithInvalidCredentials () {
+    public void RegisterStudent_InvalidCredentials_ExpectFalse () {
 
         // Nieuwe student array aanmaken voor het testen
         ArrayList<Student> studenten = new ArrayList<>();
@@ -43,7 +43,7 @@ public class RegisterStudentTest {
     }
 
     @Test
-    public void CheckIfStudentAlreadyExists () {
+    public void RegisterStudent_AlreadyExists_ExpectFalse () {
 
         // Nieuwe student array aanmaken voor het testen
         ArrayList<Student> studenten = new ArrayList<>();
