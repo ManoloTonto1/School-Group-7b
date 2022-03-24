@@ -38,6 +38,26 @@ public class Utility {
         json.saveStudents(studenten);
         return true;
     }
+    public boolean DeleteStudent(ArrayList<Student> studenten, int input){
+        
+        
+        
+        System.out.println("Kies de student dat je wilt verwijderen, gebruik de nummers.");
+        for(int i =0; i<studenten.size();i++){
+            System.out.println((i+1)+ " " + studenten.get(i).getNaam() +" :: "+ studenten.get(i).getStudentNummer());
+        }
+        int choice = input;
+        //check if user chose a correct input
+        if(choice > studenten.size() || choice <= 0){
+            System.out.println("De student dat je wilt verwijderen bestaat niet, probeer nogmaals");
+            return false;
+        }
+
+        studenten.remove((choice-1));
+        System.out.println("[i] Student verwijderd.");
+        json.saveStudents(studenten);
+        return true;
+    }
 
     public void Menu(){
         // Start any objects now like the loading from shit.

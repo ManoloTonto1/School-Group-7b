@@ -3,11 +3,16 @@ package test;
 import static org.junit.Assert.*;
 
 import app.Student;
+import app.Utility;
+
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;
 
+
+
 public class StudentTest {
+   static Utility utility = Utility.getInstance();
     @Test
     public void testVraag() {
         ArrayList<String> studentTestArray = new ArrayList<String>();
@@ -20,5 +25,14 @@ public class StudentTest {
         assertEquals("Akasha", studentTest.getNaam());
         assertEquals(18104355, studentTest.getStudentNummer());
         assertTrue(testArray);
+    }
+
+    @Test
+    public void testDeleteStuent(){
+
+        //make students
+        ArrayList<Student> studenten = new ArrayList<>();
+        studenten.add(new Student(696969));
+        assertTrue(utility.DeleteStudent(studenten,1));
     }
 }
