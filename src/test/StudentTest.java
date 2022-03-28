@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class StudentTest {
     @Test
     public void testVraag() {
+        //Arrange
+
+        //Act
+
+        //Assert
         ArrayList<String> studentTestArray = new ArrayList<String>();
         studentTestArray.add("Topo Toets");
         Student studentTest = new Student("Akasha", 18104355, studentTestArray);

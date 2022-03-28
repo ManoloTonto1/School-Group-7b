@@ -9,6 +9,11 @@ import org.junit.Test;
 public class VraagTest {
     @Test
     public void testStudent() {
+        //Arrange
+
+        //Act
+
+        //Assert
         Vraag vraagtest = new Vraag("antwoordA","antwoordB","goedAntwoord","deVraag");
         assertEquals("antwoordA", vraagtest.getAntwoord_A());
         assertEquals("antwoordB", vraagtest.getAntwoord_B());

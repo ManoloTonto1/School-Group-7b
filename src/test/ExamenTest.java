@@ -11,6 +11,11 @@ import java.util.ArrayList;
 public class ExamenTest {
     @Test
     public void testExamen() {
+        //Arrange
+
+        //Act
+
+        //Assert
         Examen examenTest = new Examen("Topo Toets", 6);
         ArrayList<Vraag> vraagtest = new ArrayList<Vraag>();
         vraagtest.add(new Vraag ("Bulgarije", "Servië", "a", "Van welk land is de hoofdstad Sofia?"));
