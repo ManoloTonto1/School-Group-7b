@@ -11,19 +11,21 @@ public class StudentTest {
     @Test
     public void testVraag() {
         //Arrange
-
-        //Act
-
-        //Assert
         ArrayList<String> studentTestArray = new ArrayList<String>();
         studentTestArray.add("Topo Toets");
         Student studentTest = new Student("Akasha", 18104355, studentTestArray);
         boolean testArray=false;
+        String verwachtResultaatGetNaam = "Akasha";
+        int verwachtResultaatGetStudentNummer = 18104355;
+        //Act
+        String testResultaatGetNaam = studentTest.getNaam();
+        int testResultaatGetStudentNummer = studentTest.getStudentNummer();
         if(studentTestArray.get(0).equals(studentTest.getGehaaldeExamens().get(0))){
             testArray=true;
         }
-        assertEquals("Akasha", studentTest.getNaam());
-        assertEquals(18104355, studentTest.getStudentNummer());
+        //Assert
+        assertEquals(verwachtResultaatGetNaam, testResultaatGetNaam);
+        assertEquals(verwachtResultaatGetStudentNummer, testResultaatGetStudentNummer);
         assertTrue(testArray);
     }
 }
