@@ -13,6 +13,7 @@ public class ExamenTest {
     public void testExamen() {
         //Arrange
         Examen examenTest = new Examen("Topo Toets", 6);
+        examenTest.examen1();
         ArrayList<Vraag> vraagtest = new ArrayList<>();
         vraagtest.add(new Vraag ("Bulgarije", "Servië", "a", "Van welk land is de hoofdstad Sofia?"));
         String verwachtResultaatGetNaam = "Topo Toets";
@@ -21,7 +22,7 @@ public class ExamenTest {
         //Act
         String testResultaatGetNaam = examenTest.getNaam();
         int testResultaatGetMinCorrect = examenTest.getMinCorrect();
-        String testResultaatGetVragen = vraagtest.get(0).getVraagStelling();
+        String testResultaatGetVragen = examenTest.getVragen().get(0).getVraagStelling();
         //Assert
         assertEquals(verwachtResultaatGetNaam, testResultaatGetNaam);
         assertEquals(verwachtResultaatGetMinCorrect, testResultaatGetMinCorrect);
