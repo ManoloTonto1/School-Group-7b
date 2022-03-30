@@ -10,14 +10,20 @@ public class VraagTest {
     @Test
     public void testStudent() {
         //Arrange
-
-        //Act
-
-        //Assert
         Vraag vraagtest = new Vraag("antwoordA","antwoordB","goedAntwoord","deVraag");
-        assertEquals("antwoordA", vraagtest.getAntwoord_A());
-        assertEquals("antwoordB", vraagtest.getAntwoord_B());
-        assertEquals("goedAntwoord",vraagtest.getCorrectAntwoord());
-        assertEquals("deVraag",vraagtest.getVraagStelling());
+        String verwachtResultaatGetAntwoord_A = "antwoordA";
+        String verwachtResultaatGetAntwoord_B = "antwoordB";
+        String verwachtResultaatGetGoedAntwoord = "goedAntwoord";
+        String verwachtResultaatGetVraagStelling = "deVraag";
+        //Act
+        String testResultaatGetAntwoord_A = vraagtest.getAntwoord_A();
+        String testResultaatGetAntwoord_B = vraagtest.getAntwoord_B();
+        String testResultaatGetGoedAntwoord = vraagtest.getCorrectAntwoord();
+        String testResultaatGetVraagStelling = vraagtest.getVraagStelling();
+        //Assert
+        assertEquals(verwachtResultaatGetAntwoord_A, testResultaatGetAntwoord_A);
+        assertEquals(verwachtResultaatGetAntwoord_B, testResultaatGetAntwoord_B);
+        assertEquals(verwachtResultaatGetGoedAntwoord,testResultaatGetGoedAntwoord);
+        assertEquals(verwachtResultaatGetVraagStelling,testResultaatGetVraagStelling);
     }
 }
