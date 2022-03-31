@@ -78,16 +78,17 @@ public class Examen {
             return false;
         }
     }
+    //TEST
     public int maakExamen(ArrayList<String> antwoorden){
         int vragenGoedBeantwoord = 0;
         Scanner sc = new Scanner(System.in);
 
-        for (Vraag i : vragen){
-            System.out.println(i.getVraagStelling());
-            System.out.println("A: " + i.getAntwoord_A());
-            System.out.println("B: " + i.getAntwoord_B());
+        for (int i = 0; i < vragen.size(); i++){
+            System.out.println(vragen.get(i).getVraagStelling());
+            System.out.println("A: " + vragen.get(i).getAntwoord_A());
+            System.out.println("B: " + vragen.get(i).getAntwoord_B());
             System.out.print("Vul uw antwoord in : ");
-            if (sc.nextLine().equalsIgnoreCase(i.getCorrectAntwoord())){
+            if (antwoorden.get(i).equals(vragen.get(i).getCorrectAntwoord())){
                 vragenGoedBeantwoord++;
             }
         }
