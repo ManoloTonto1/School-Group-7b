@@ -21,7 +21,7 @@ public class LoginManagerTest {
         int studentNummer = 01234567;
 
         // Voert de functie uit en checkt of deze true terug geeft (omdat het opgegeven studentnummer in de array voorkomt)
-        LoginManager manager = new LoginManager();
+        LoginManager manager = LoginManager.getInstance();
         assertTrue(manager.Login(studenten, studentNummer));
         
     }
@@ -38,7 +38,7 @@ public class LoginManagerTest {
         int studentNummer = 76543210;
 
         // Voert de functie uit en checkt of deze false terug geeft (omdat het opgegeven studentnummer niet in de array voorkomt)
-        LoginManager manager = new LoginManager();
+        LoginManager manager = LoginManager.getInstance();
         assertFalse(manager.Login(studenten, studentNummer));
     }
 
@@ -52,7 +52,7 @@ public class LoginManagerTest {
         int studentNummer = 01234567;
 
         // Loginmanager object aanmaken
-        LoginManager manager = new LoginManager();
+        LoginManager manager = LoginManager.getInstance();
 
         // Controleren of de functie false terug geeft (er zijn geen studenten ingeschreven, waardoor er niet kan worden ingelogd)
         assertFalse(manager.Login(studenten, studentNummer));
@@ -60,7 +60,7 @@ public class LoginManagerTest {
 
     @Test
     public void LoginManager_GetStudentWhenNotLoggedIn_ExpectNull() {
-        LoginManager manager = new LoginManager();
+        LoginManager manager = LoginManager.getInstance();
 
         // Checkt of er een student is ingelogd en kan dus geen Student object terug geven
         assertNull(manager.getStudent());
@@ -78,7 +78,7 @@ public class LoginManagerTest {
         // Deze int wordt normaal door een scanner opgevraagd
         int studentNummer = 01234567;
 
-        LoginManager manager = new LoginManager();
+        LoginManager manager = LoginManager.getInstance();
 
         // Inloggen in de loginmanager
         manager.Login(studenten, studentNummer);
