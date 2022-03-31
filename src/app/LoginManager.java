@@ -1,22 +1,28 @@
 package app;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class LoginManager {
 
+    private static LoginManager instance = null;
     private Student studentLoggedIn;
+    private LoginManager(){
+       studentLoggedIn = null;
+    }
 
-    public boolean Login(ArrayList<Student> students) {
-        Scanner loginManagerScanner = new Scanner(System.in);
+    public static LoginManager getInstance() {
+        if (instance == null) {
+            instance = new LoginManager();
+        }
+        return instance;
+    }
 
-        System.out.print("Voer je Studentnummer in: ");
-        int studentNummer = loginManagerScanner.nextInt();
-
+    public boolean Login(ArrayList<Student> students, int studentNumber) {
+  
         boolean loginSucces = false;
 
         for (Student student : students) {
-            if (studentNummer == student.getStudentNummer()) {
+            if (studentNumber == student.getStudentNummer()) {
                 setStudent(student);
                 loginSucces = true;
             }
@@ -25,9 +31,10 @@ public class LoginManager {
         if (loginSucces) {
             System.out.println(
                     "[i] Ingelogd als: " + studentLoggedIn.getNaam() + " (" + studentLoggedIn.getStudentNummer() + ")");
+                    
             return true;
         } else {
-            System.out.println("[!] Studentnummer '" + studentNummer + "' niet gevonden.");
+            System.out.println("[!] Studentnummer '" + studentNumber + "' niet gevonden.");
             return false;
         }
     }

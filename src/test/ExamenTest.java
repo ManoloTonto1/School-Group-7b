@@ -27,5 +27,6 @@ public class ExamenTest {
         assertEquals(verwachtResultaatGetNaam, testResultaatGetNaam);
         assertEquals(verwachtResultaatGetMinCorrect, testResultaatGetMinCorrect);
         assertEquals(verwachtResultaatGetVragen,testResultaatGetVragen);
+
     }
 }

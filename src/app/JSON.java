@@ -94,7 +94,7 @@ public class JSON {
         try (FileWriter file = new FileWriter("students.json")) {
             file.write(root.toJSONString());
             file.flush();
-            System.out.println("Successfully saved File.");
+            //System.out.println("Successfully saved File.");
             return true;
         } catch (IOException e) {
             e.printStackTrace();

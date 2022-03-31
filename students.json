@@ -1,1 +1,41 @@
-{"123456":{"naam":"Manolo Lopez","studentNummer":123456,"gehaaldeExamens":["scheikunde","wiskunde","biologie"]},"12345678":{"naam":"Mitchell Ekelschot","studentNummer":12345678,"gehaaldeExamens":[]},"123458":{"naam":"Joe Mama","studentNummer":123458,"gehaaldeExamens":[]},"696969":{"naam":"Martijn Gelton","studentNummer":696969,"gehaaldeExamens":["scheikunde","wiskunde","biologie","informatica"]},"88888888":{"naam":"billy","studentNummer":88888888,"gehaaldeExamens":[]},"789456":{"naam":"Akasha Nutch","studentNummer":789456,"gehaaldeExamens":[]}}
+{
+    "123456": {
+        "naam": "Manolo Lopez",
+        "studentNummer": 123456,
+        "gehaaldeExamens": [
+            "scheikunde",
+            "wiskunde",
+            "biologie"
+        ]
+    },
+    "12345678": {
+        "naam": "Mitchell Ekelschot",
+        "studentNummer": 12345678,
+        "gehaaldeExamens": []
+    },
+    "696969": {
+        "naam": "Martijn Gelton",
+        "studentNummer": 696969,
+        "gehaaldeExamens": [
+            "scheikunde",
+            "wiskunde",
+            "biologie",
+            "informatica"
+        ]
+    },
+    "88888888": {
+        "naam": "billy",
+        "studentNummer": 88888888,
+        "gehaaldeExamens": []
+    },
+    "87654321": {
+        "naam": "Mike Oxlong",
+        "studentNummer": 87654321,
+        "gehaaldeExamens": []
+    },
+    "789456": {
+        "naam": "Akasha Nutch",
+        "studentNummer": 789456,
+        "gehaaldeExamens": []
+    }
+}
