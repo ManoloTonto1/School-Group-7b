@@ -9,6 +9,7 @@ import javax.swing.plaf.basic.BasicTreeUI.TreeToggleAction;
 
 public class Utility {
     static JSON json = JSON.getInstance();
+    static LoginManager session = LoginManager.getInstance();
 
     private Utility() {
     }
@@ -64,7 +65,7 @@ public class Utility {
         // Start any objects now like the loading from shit.
         
         ArrayList<Examen> examens = new ArrayList<>();
-        examens.add(new Examen("Java"));
+        examens.add(new Examen("Test"));
         // Demy files
         examens.add(new Examen("Topo Toets"));
         examens.add(new Examen("Higher Lower"));
@@ -88,6 +89,8 @@ public class Utility {
             System.out.println("6) Is student geslaagd voor test?");
             System.out.println("7) Welke examens heeft student gehaald?");
             System.out.println("8) Welke student heeft de meeste examens gehaald?");
+            if(session.getStudent() != null) System.out.println("9) Welke examens heb ik gehaald?");
+            
             System.out.println();
             System.out.println("----------------------------------------------------");
 
@@ -129,13 +132,17 @@ public class Utility {
                     System.out.println("===========================");
                     break;
                 case 6:
-                    hasStudentPassedExam(studenten);
+                    hasStudentPassedExam(studenten, examens);
                     break;
                 case 7:
                     showStudentExams(studenten);
                     break;
                 case 8:
                     showStudentMostExams(studenten);
+
+                    break;
+                case 9:
+                    showMyExams(session.getStudent().getStudentNummer(), studenten);
 
                     break;
                 default:
@@ -150,7 +157,7 @@ public class Utility {
         Examen examen1 = new Examen("Topo Toets", 6);
         Examen examen2 = new Examen("Higher Lower", 6);
 
-        LoginManager session = new LoginManager();
+        
         Scanner loginScanner = new Scanner(System.in);
 
         System.out.print("Voer je Studentnummer in: ");
@@ -344,36 +351,118 @@ public class Utility {
         }
     }
 
-    public static boolean hasStudentPassedExam(ArrayList<Student> studenten) {
+    public static boolean isNumeric(String string) {
+        // Failsafe
+        if (string == null) {
+            return false;
+        }
+
+        // Proberen om een double van de ingevoerde string te maken
+        try {
+            Double.parseDouble(string);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static Student SearchStudent(ArrayList<Student> studenten, ArrayList<Examen> examens) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welke student wilt u opzoeken?");
         String studentInput = scanner.nextLine();
 
-        System.out.println("Welk examen wilt u opzoeken?");
-        String examenInput = scanner.nextLine();
-        Boolean geslaagd = false;
-        for (int i = 0; i < studenten.size(); i++) {
-            if (studentInput.equals(studenten.get(i).getNaam())) {
-                int examsAmount = studenten.get(i).getGehaaldeExamens().size();
-                if (examsAmount > 0) {
-                    for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
-                        if (examenInput.equals(studenten.get(i).getGehaaldeExamens().get(j))) {
-                            System.out.println("Student met de naam: " + studenten.get(i).getNaam()
-                                    + " heeft het examen: " + examenInput + " gehaald");
-                            geslaagd = true;
-                        }
-                    }
-                } else {
-                    System.out.println(
-                            "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+        boolean searchStudentByNumber = false;
+        int studentNummer = 0;
+
+        // als de ingevoerde string bestaat uit nummers, wordt er van uit gegaan dat de gebruiker een student wilt opzoeken via een studentnummer
+        if(isNumeric(studentInput)) {
+           searchStudentByNumber = true;
+            studentNummer = Integer.parseInt(studentInput);
+        }
+
+        if(searchStudentByNumber) {
+
+            // Student opzoeken via studentnummer
+
+            for (Student student : studenten) {
+                if(student.getStudentNummer() == studentNummer) {
+                    
+                    // Student gevonden
+
+                    System.out.println("[i] Geselecteerde Student: " + student.getNaam() + " (" + student.getStudentNummer()+")");
+                    System.out.println("----------------------------------------------------");
+
+                    return student;
                 }
             }
+            System.out.println("[!] Student niet gevonden");
+            System.out.println("----------------------------------------------------");
+        } else {
+
+            // Student opzoeken via naam
+
+            for (Student student : studenten) {
+
+                // naam vergelijken met de namen in de studenten array
+                if(student.getNaam().toLowerCase().equals(studentInput.toLowerCase())) {
+                    
+                    // Student gevonden
+
+                    System.out.println("[i] Geselecteerde Student: " + student.getNaam() + " (" + student.getStudentNummer()+")");
+                    System.out.println("----------------------------------------------------");
+
+                    return student;
+                }
+            }
+            System.out.println("[!] Student niet gevonden");
+            System.out.println("----------------------------------------------------");
         }
-        if (!geslaagd) {
-            System.out.println(
-                    "Student met de naam: " + studentInput + " heeft het examen: " + examenInput + " niet gehaald");
+
+        return null;
+    }
+
+    public static boolean hasStudentPassedExam(ArrayList<Student> studenten, ArrayList<Examen> examens) {
+        Scanner examenInput = new Scanner(System.in);
+        Student student = SearchStudent(studenten, examens);
+
+        System.out.println("[i] Selecteer een examen van de lijst");
+        
+        // Alle examens weergeven
+
+        for (int i = 0; i < examens.size(); i++) {
+                System.out.println((i+1)+") "+ examens.get(i).getNaam());
         }
-        return geslaagd;
+        System.out.println("----------------------------------------------------");
+
+        
+        System.out.print("Uw selectie: ");
+        int selection = examenInput.nextInt();
+        System.out.println("----------------------------------------------------");
+
+        Examen examen = examens.get(selection-1);
+        ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
+
+        // Controleren of de lijst gehaalde examens leeg is
+
+        if(gehaaldeExamens.isEmpty()) {
+            System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft nog geen examens gehaald." );
+            return false;
+        }
+
+        // Controleren of de student het geselecteerde examen heeft gehaald
+        boolean examenNietGevonden = true;
+        for (String string : gehaaldeExamens) {
+            if(string.toLowerCase().equals(examen.getNaam().toLowerCase())) {
+                System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft het examen " + examen.getNaam() + " gehaald");
+                examenNietGevonden = true;
+                return true;
+            }
+        }
+
+        if(examenNietGevonden) {
+            System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft het examen " + examen.getNaam() + " (nog) niet gehaald");
+        }
+        return false;
     }
 
     public static boolean hasStudentPassedExam(ArrayList<Student> studenten, String input1, String input2) {
@@ -405,6 +494,27 @@ public class Utility {
                     "Student met de naam: " + studentInput + " heeft het examen: " + examenInput + " niet gehaald");
         }
         return geslaagd;
+    }
+
+
+    public static void showMyExams(int studentnummer, ArrayList<Student> studenten) {
+        for (int i = 0; i < studenten.size(); i++) {
+            if (studentnummer == studenten.get(i).getStudentNummer()) {
+                int examsAmount = studenten.get(i).getGehaaldeExamens().size();
+                if (examsAmount > 0) {
+                    System.out.println("Student met de naam: " + studenten.get(i).getNaam() + " heeft de volgende examens gehaald:");
+                    System.out.println("===============================================================");
+                    for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
+                        System.out.println("Examen " + (j + 1) + ": " + studenten.get(i).getGehaaldeExamens().get(j));
+                    }
+                } else {
+                    System.out.println(
+                            "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+                }
+            }
+        }
+
+
     }
 
     

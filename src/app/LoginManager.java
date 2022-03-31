@@ -4,7 +4,18 @@ import java.util.ArrayList;
 
 public class LoginManager {
 
+    private static LoginManager instance = null;
     private Student studentLoggedIn;
+    private LoginManager(){
+       studentLoggedIn = null;
+    }
+
+    public static LoginManager getInstance() {
+        if (instance == null) {
+            instance = new LoginManager();
+        }
+        return instance;
+    }
 
     public boolean Login(ArrayList<Student> students, int studentNumber) {
   
@@ -20,6 +31,7 @@ public class LoginManager {
         if (loginSucces) {
             System.out.println(
                     "[i] Ingelogd als: " + studentLoggedIn.getNaam() + " (" + studentLoggedIn.getStudentNummer() + ")");
+                    
             return true;
         } else {
             System.out.println("[!] Studentnummer '" + studentNumber + "' niet gevonden.");

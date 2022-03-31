@@ -1,4 +1,5 @@
 package test;
+
 import app.Examen;
 import app.Vraag;
 import org.junit.Test;
@@ -12,27 +13,28 @@ import static org.junit.Assert.assertTrue;
 public class testMaakExamen {
     @Test
 
-    public void test_MaakExamen_10_GoedeAntwoorden(){
+    public void test_MaakExamen_10_GoedeAntwoorden() {
 
-        //Arrange
-        Examen examen = new Examen("testExamen" , 6);
+        // Arrange
+        Examen examen = new Examen("testExamen", 6);
         examen.examen1();
 
         ArrayList<String> antwoordenExamenTest = new ArrayList<>();
 
         // Vult de arraylist met de goede antwoorden.
-        for (Vraag v : examen.getVragen()){
+        for (Vraag v : examen.getVragen()) {
             antwoordenExamenTest.add(v.getCorrectAntwoord());
         }
 
-        //Act
+        // Act
         int expectedResult = 10;
         int result = examen.maakExamen(antwoordenExamenTest);
 
-        //Assert
-        assertEquals(expectedResult , result );
+        // Assert
+        assertEquals(expectedResult, result);
 
     }
+
     @Test
     public void test_MaakExamen_0_GoedeAntwoorden(){
 
@@ -51,5 +53,12 @@ public class testMaakExamen {
                 antwoordenExamenTest.add("a");
             }
         }
+        // Act
+        int expectedResult = 0;
+        int result = examen.maakExamen(antwoordenExamenTest);
+
+        // Assert
+        assertEquals(expectedResult, result);
+
     }
 }
