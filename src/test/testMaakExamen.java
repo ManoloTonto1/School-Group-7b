@@ -53,5 +53,12 @@ public class testMaakExamen {
                 antwoordenExamenTest.add("a");
             }
         }
+        // Act
+        int expectedResult = 0;
+        int result = examen.maakExamen(antwoordenExamenTest);
+
+        // Assert
+        assertEquals(expectedResult, result);
+
     }
 }
