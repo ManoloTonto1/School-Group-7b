@@ -135,7 +135,7 @@ public class Utility {
                     hasStudentPassedExam(studenten, examens);
                     break;
                 case 7:
-                    showStudentExams(studenten);
+                    showStudentExams(studenten, examens);
                     break;
                 case 8:
                     showStudentMostExams(studenten);
@@ -330,25 +330,37 @@ public class Utility {
         }
     }
 
-    public static void showStudentExams(ArrayList<Student> studenten) {
-        System.out.println("Welke student wilt u opzoeken?");
+    public static void showStudentExams(ArrayList<Student> studenten, ArrayList<Examen> examens) {
         Scanner scanner = new Scanner(System.in);
+        Student student = SearchStudent(studenten, examens);
 
-        String input = scanner.nextLine();
+        ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
 
-        for (int i = 0; i < studenten.size(); i++) {
-            if (input.equals(studenten.get(i).getNaam())) {
-                int examsAmount = studenten.get(i).getGehaaldeExamens().size();
-                if (examsAmount > 0) {
-                    for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
-                        System.out.println("Examen " + (j + 1) + ": " + studenten.get(i).getGehaaldeExamens().get(j));
-                    }
-                } else {
-                    System.out.println(
-                            "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
-                }
-            }
+        boolean heeftExamensGemaakt = false;
+        for (String string : gehaaldeExamens) {
+            System.out.println(string);
+            heeftExamensGemaakt = true;
         }
+
+        if(!heeftExamensGemaakt) {
+            System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft (nog) geen examens gemaakt");
+        }
+
+        // String input = scanner.nextLine();
+
+        // for (int i = 0; i < studenten.size(); i++) {
+        //     if (input.equals(studenten.get(i).getNaam())) {
+        //         int examsAmount = studenten.get(i).getGehaaldeExamens().size();
+        //         if (examsAmount > 0) {
+        //             for (int j = 0; j < studenten.get(i).getGehaaldeExamens().size(); j++) {
+        //                 System.out.println("Examen " + (j + 1) + ": " + studenten.get(i).getGehaaldeExamens().get(j));
+        //             }
+        //         } else {
+        //             System.out.println(
+        //                     "Student met de naam: " + studenten.get(i).getNaam() + " heeft nog geen examens gehaald.");
+        //         }
+        //     }
+        // }
     }
 
     public static boolean isNumeric(String string) {
