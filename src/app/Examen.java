@@ -78,23 +78,6 @@ public class Examen {
             return false;
         }
     }
-<<<<<<< Updated upstream
-    //TEST
-    public int maakExamen(ArrayList<String> antwoorden){
-        int vragenGoedBeantwoord = 0;
-        int vraagNummer = 1;
-        Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < vragen.size();i++){
-            System.out.println("Vraag  " + vraagNummer + ": "+ vragen.get(i).getVraagStelling());
-            System.out.println("A: " + vragen.get(i).getAntwoord_A());
-            System.out.println("B: " + vragen.get(i).getAntwoord_B());
-            System.out.print("Vul uw antwoord in : ");
-            vraagNummer++;
-            if (antwoorden.get(i).equalsIgnoreCase(vragen.get(i).getCorrectAntwoord())){
-                vragenGoedBeantwoord++;
-            }
-
-=======
     public int maakExamen(ArrayList<String> antwoorden){
         int vragenGoedBeantwoord = 0;
         Scanner sc = new Scanner(System.in);
@@ -107,7 +90,6 @@ public class Examen {
             if (sc.nextLine().equalsIgnoreCase(i.getCorrectAntwoord())){
                 vragenGoedBeantwoord++;
             }
->>>>>>> Stashed changes
         }
         return vragenGoedBeantwoord;
     }

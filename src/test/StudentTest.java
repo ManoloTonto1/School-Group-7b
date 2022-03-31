@@ -28,11 +28,14 @@ public class StudentTest {
     }
 
     @Test
-    public void testDeleteStuent(){
+    public void testDeleteStudent_DeleteStudent_True(){
 
-        //make students
+        //arrange
         ArrayList<Student> studenten = new ArrayList<>();
         studenten.add(new Student(696969));
-        assertTrue(utility.DeleteStudent(studenten,1));
+        Boolean input = utility.DeleteStudent(studenten,1);
+        
+        //assert
+        assertTrue(input);
     }
 }
