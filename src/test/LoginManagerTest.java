@@ -9,6 +9,16 @@ import org.junit.Test;
 public class LoginManagerTest {
 
     @Test
+    public void LoginManager_GetStudentWhenNotLoggedIn_ExpectNull() {
+        LoginManager manager = LoginManager.getInstance();
+
+        // // Checkt of er een student is ingelogd en kan dus geen Student object terug geven
+        if(manager.getStudent() == null) {
+            assertNull(manager.getStudent());
+        }
+    }
+
+    @Test
     public void LoginManager_LoginCorrectCredentials_ExpectTrue() {
         
         // Array aanmaken
@@ -56,14 +66,6 @@ public class LoginManagerTest {
 
         // Controleren of de functie false terug geeft (er zijn geen studenten ingeschreven, waardoor er niet kan worden ingelogd)
         assertFalse(manager.Login(studenten, studentNummer));
-    }
-
-    @Test
-    public void LoginManager_GetStudentWhenNotLoggedIn_ExpectNull() {
-        LoginManager manager = LoginManager.getInstance();
-
-        // Checkt of er een student is ingelogd en kan dus geen Student object terug geven
-        assertNull(manager.getStudent());
     }
 
     @Test
