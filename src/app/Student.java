@@ -12,6 +12,11 @@ public class Student {
         this.studentNummer = studentNummer;
         this.gehaaldeExamens = gehaaldeExamens;
     }
+    public Student(String naam, Integer studentNummer){
+        this.naam = naam;
+        this.studentNummer = studentNummer;
+        
+    }
     public Student(Integer studentNummer){
         this.studentNummer= studentNummer;
     }

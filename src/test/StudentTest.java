@@ -35,14 +35,18 @@ public class StudentTest {
     }
 
     @Test
-    public void testDeleteStudent_DeleteStudent_True(){
+    public void testDeleteStudent_DeleteStudent_ReturnsTrue(){
 
         //arrange
-        ArrayList<Student> studenten = new ArrayList<>();
-        studenten.add(new Student(696969));
-        Boolean input = utility.DeleteStudent(studenten,1);
+        ArrayList<Student> studenten = new ArrayList<Student>();
+        Student manolo = new Student("manolo",12345678);
+        Student manols = new Student("manols",12345679);
+        studenten.add(manolo);
+        studenten.add(manols);
+        //act
+        Boolean result = utility.DeleteStudent(studenten,1);
         
         //assert
-        assertTrue(input);
+        assertTrue(result);
     }
 }
