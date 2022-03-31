@@ -50,3 +50,6 @@ public class testMaakExamen {
             else if (v.getCorrectAntwoord().equals("b")){
                 antwoordenExamenTest.add("a");
             }
+        }
+    }
+}
