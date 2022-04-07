@@ -94,7 +94,7 @@ public class Utility {
             System.out.println();
             System.out.println("----------------------------------------------------");
 
-            int input = scanner.nextInt();
+            int input = isNumericReturnInt(scanner.nextLine());
             switch (input) {
                 case 0:
                     System.out.println("Goodbye");
@@ -142,8 +142,10 @@ public class Utility {
 
                     break;
                 case 9:
+                if(session.getStudent() != null){
                     showMyExams(session.getStudent().getStudentNummer(), studenten);
-
+                }
+                else System.out.println("[!] Invalid input");
                     break;
                 default:
                     System.out.println("[!] Invalid input");
@@ -366,6 +368,23 @@ public class Utility {
         }
         return true;
     }
+
+    public static int isNumericReturnInt(String string) {
+        // Failsafe
+        int i;
+        if (string == null) {
+            return -1;
+        }
+        // Proberen om een double van de ingevoerde string te maken
+        try {
+           i = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+        return i;
+    }
+    
+
 
     public static Student SearchStudent(ArrayList<Student> studenten, ArrayList<Examen> examens) {
         Scanner scanner = new Scanner(System.in);
