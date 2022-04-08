@@ -27,8 +27,11 @@ public class Utility {
         for(int i =0; i<studenten.size();i++){
             System.out.println((i+1)+ " " + studenten.get(i).getNaam() +" :: "+ studenten.get(i).getStudentNummer());
         }
-        int choice = scanner.nextInt();
-        //check if user chose a correct input
+        int choice =  isNumericReturnInt(scanner.nextLine());
+        if (choice == -1){
+            System.out.println("Probeer opnieuw. Voer een getal in.");
+            DeleteStudent( studenten);
+        }
         if(choice > studenten.size() || choice <= 0){
             System.out.println("De student dat je wilt verwijderen bestaat niet, probeer nogmaals");
             return false;
