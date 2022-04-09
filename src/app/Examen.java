@@ -56,8 +56,9 @@ public class Examen {
     public int maakExamen(){
         int vragenGoedBeantwoord = 0;
         Scanner sc = new Scanner(System.in);
-        
+        int vraagNummer = 1 ;
         for (Vraag i : vragen){
+            System.out.println("Vraag " + vraagNummer + ":");
             System.out.println(i.getVraagStelling());
             System.out.println("A: " + i.getAntwoord_A());
             System.out.println("B: " + i.getAntwoord_B());
@@ -65,18 +66,26 @@ public class Examen {
             if (sc.nextLine().equalsIgnoreCase(i.getCorrectAntwoord())){
                 vragenGoedBeantwoord++;
             }
+            vraagNummer++;
         }
         return vragenGoedBeantwoord;
     }
     public boolean checkVoldoende(int vragenGoedBeantwoord){
         if (vragenGoedBeantwoord >= minCorrect){
-            System.out.println("Gefeliciteert u bent geslaagd voor het examen : " + getNaam());
+            System.out.println("Gefeliciteert, u bent geslaagd voor het examen : " + getNaam());
+            System.out.println("Cijfer : " + berekenCijfer(vragenGoedBeantwoord , vragen.size()));
             return true;
         }
         else {
-            System.out.println("Helaas u bent gezakt voor het examen : " + getNaam());
+            System.out.println("Helaas,  u bent gezakt voor het examen : " + getNaam());
+            System.out.println("Cijfer : " + berekenCijfer(vragenGoedBeantwoord , vragen.size()));
             return false;
         }
+
+
+    }
+    public double berekenCijfer(int vragenGoedBeantwoord , int aantalVragen){
+        return (vragenGoedBeantwoord + .0 / aantalVragen)  ;
     }
     //TEST
     public int maakExamen(ArrayList<String> antwoorden){

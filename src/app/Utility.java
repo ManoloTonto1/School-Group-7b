@@ -166,8 +166,11 @@ public class Utility {
         Scanner loginScanner = new Scanner(System.in);
 
         System.out.print("Voer je Studentnummer in: ");
-        int studentNummer = loginScanner.nextInt();
-
+        int studentNummer = isNumericReturnInt(loginScanner.nextLine());
+        while (studentNummer == -1){
+            System.out.println("Voer een geldig studentnummer in : ");
+            studentNummer = isNumericReturnInt(loginScanner.nextLine());
+        }
         if(session.Login(studenten, studentNummer)) {
 
             
@@ -177,9 +180,14 @@ public class Utility {
             
             showExams(examens);
             
-            int l = examenScanner.nextInt();
+            int l = isNumericReturnInt(examenScanner.nextLine());
 
             switch (l) {
+
+               default -> {
+                   System.out.println("Probeer opnieuw. Vul een getal in van een bestaand examen.");
+               }
+
                 case 1 -> {
                     examen1.examen1();
                     if (examen1.checkVoldoende(examen1.maakExamen())){
@@ -187,7 +195,6 @@ public class Utility {
                             session.getStudent().addGehaaldeExamen(examen1.getNaam());
                             json.saveStudents(studenten);
                         }
-
                     }
                 }
                 case 2 -> {
