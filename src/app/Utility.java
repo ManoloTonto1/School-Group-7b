@@ -466,7 +466,7 @@ public class Utility {
 
         
         System.out.print("Uw selectie: ");
-        int selection = examenInput.nextInt();
+        int selection = isNumericReturnInt(examenInput.nextLine());
         System.out.println("----------------------------------------------------");
 
         Examen examen = examens.get(selection-1);
