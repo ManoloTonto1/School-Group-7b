@@ -17,16 +17,30 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SearchUtilTest {
+
+    ArrayList<Student> studenten = new ArrayList<>();
+    ArrayList<Student> studenten2 = new ArrayList<>();
+    ArrayList<String> exams = new ArrayList<>();
+    ArrayList<String> exams2 = new ArrayList<>();
+
+    void varSetup() {
+        if(studenten.size() >= 0 || studenten2.size() >= 0 || exams.size() >= 0 || exams.size() >= 0) {
+            studenten.clear();
+            studenten2.clear();
+            exams.clear();
+            exams2.clear();
+        }
+
+        Collections.addAll(exams, "scheikunde", "wiskunde", "biologie");
+        studenten.add(new Student("Manuel Lopez", 123456, exams));
+        Collections.addAll(exams2, "scheikunde", "wiskunde");
+        studenten.add(new Student("Martijn Gelton", 123456, exams2));
+    }
+
     @Test
     public void showStudentMostExams_getStudentWithMostExams_returnsMartijn() {
         //Arrange
-        ArrayList<Student> studenten = new ArrayList<>();
-        ArrayList<String> exams = new ArrayList<>();
-        Collections.addAll(exams, "scheikunde", "wiskunde", "biologie");
-        studenten.add(new Student("Manuel Lopez", 123456, exams));
-        ArrayList<String> exams2 = new ArrayList<>();
-        Collections.addAll(exams2, "scheikunde", "wiskunde");
-        studenten.add(new Student("Martijn Gelton", 123456, exams));
+        varSetup();
         Boolean expectedResult = true;
         Boolean actualResult = false;
 
@@ -62,14 +76,7 @@ public class SearchUtilTest {
     @Test
     public void showStudents_onlyShowsStudentsWhenFilled_returnsTrueAndFalse() {
         //Arrange
-        ArrayList<Student> studenten = new ArrayList<>();
-        ArrayList<Student> studenten2 = new ArrayList<>();
-        ArrayList<String> exams = new ArrayList<>();
-        Collections.addAll(exams, "scheikunde", "wiskunde", "biologie");
-        studenten.add(new Student("Manuel Lopez", 123456, exams));
-        ArrayList<String> exams2 = new ArrayList<>();
-        Collections.addAll(exams2, "scheikunde", "wiskunde");
-        studenten.add(new Student("Martijn Gelton", 123456, exams));
+        varSetup();
         int midResult1 = 0;
         int midResult2 = 0;
         int expectedResult = 2;
@@ -87,13 +94,7 @@ public class SearchUtilTest {
     @Test
     public void studentPassedExams_returnsCorrectValueDependingOnIfYouPassed_returnTrueWhenPassed() {
         //Arrange
-        ArrayList<Student> studenten = new ArrayList<>();
-        ArrayList<String> exams = new ArrayList<>();
-        Collections.addAll(exams, "scheikunde", "wiskunde", "biologie");
-        studenten.add(new Student("Manuel Lopez", 123456, exams));
-        ArrayList<String> exams2 = new ArrayList<>();
-        Collections.addAll(exams2, "scheikunde", "wiskunde");
-        studenten.add(new Student("Martijn Gelton", 123456, exams2));
+        varSetup();
         int midResult1 = 0;
         int midResult2 = 0;
         int expectedResult = 2;

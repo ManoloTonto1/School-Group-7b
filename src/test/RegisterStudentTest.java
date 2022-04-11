@@ -9,16 +9,12 @@ import java.util.ArrayList;
 
 public class RegisterStudentTest {
 
+    ArrayList<Student> studenten = new ArrayList<>();
+    Student student = new Student(1245678);
+
     // Test om te checken of de student kan worden toegevoegd in de ArrayList
     @Test
     public void RegisterStudent_NewStudent_ExpectTrue () {
-
-        // Nieuwe student array aanmaken voor het testen
-        ArrayList<Student> studenten = new ArrayList<>();
-
-        // Nieuw student object aanmaken voor het testen
-        Student student = new Student(1245678);
-
         // Voer de functie uit
         Utility.RegisterStudent(studenten, student);
 
@@ -27,29 +23,7 @@ public class RegisterStudentTest {
     }
 
     @Test
-    public void RegisterStudent_InvalidCredentials_ExpectFalse () {
-
-        // Nieuwe student array aanmaken voor het testen
-        ArrayList<Student> studenten = new ArrayList<>();
-
-        // Nieuw student object aanmaken met een te lang studentnummer voor het testen 
-        Student student = new Student(123456789);
-
-        // checkt of de functie false terug geeft
-        assertFalse(Utility.RegisterStudent(studenten, student));
-
-        // checkt of de student niet in de array is gezet
-        assertFalse(studenten.contains(student));
-    }
-
-    @Test
     public void RegisterStudent_AlreadyExists_ExpectFalse () {
-
-        // Nieuwe student array aanmaken voor het testen
-        ArrayList<Student> studenten = new ArrayList<>();
-
-        // Nieuw student object aanmaken voor het testen
-        Student student = new Student(12345678);
         studenten.add(student);
 
         // checkt of de student al bestaat in de array
