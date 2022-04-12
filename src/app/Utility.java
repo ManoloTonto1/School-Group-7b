@@ -347,7 +347,9 @@ public class Utility {
         // Student zoeken
 
         Student student = SearchStudent(studenten, examens);
-
+        if(student == null){
+            return;
+        }
         // Arraylist vullen met de gehaalde examens van de gevonden student
         ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
 
