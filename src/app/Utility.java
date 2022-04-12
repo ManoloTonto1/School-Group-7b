@@ -455,6 +455,11 @@ public class Utility {
         Scanner examenInput = new Scanner(System.in);
         Student student = SearchStudent(studenten, examens);
 
+        //Check of ingevulde student bestaat
+        if(student == null){
+            return false;
+        }
+
         System.out.println("[i] Selecteer een examen van de lijst");
         
         // Alle examens weergeven
