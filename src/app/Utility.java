@@ -347,7 +347,9 @@ public class Utility {
         // Student zoeken
 
         Student student = SearchStudent(studenten, examens);
-
+        if(student == null){
+            return;
+        }
         // Arraylist vullen met de gehaalde examens van de gevonden student
         ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
 
@@ -471,7 +473,7 @@ public class Utility {
 
         
         System.out.print("Uw selectie: ");
-        int selection = examenInput.nextInt();
+        int selection = isNumericReturnInt(examenInput.nextLine());
         System.out.println("----------------------------------------------------");
 
         Examen examen = examens.get(selection-1);
