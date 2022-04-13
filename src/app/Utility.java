@@ -220,22 +220,18 @@ public class Utility {
         // Functie aanroepen om een Student object aan te maken
         Student student = CreateStudent();
 
-        RegisterStudent(studenten, student);
+        if(student != null) {
+            RegisterStudent(studenten, student);
+        } else {
+            System.out.println("[!] Er is iets misgegaan met het registreren van de Student. Probeer het opnieuw");
+        }
+
     }
 
     public static boolean RegisterStudent(ArrayList<Student> studenten, Student student) {
 
         // Checks aanmaken
         boolean studentAlreadyExists = false;
-
-        int studentNumberLimit = 8;
-        boolean studentNumberOverLimit = false;
-
-        // Checkt of het ingevoerde studentnummer langer is dan 8 cijfers
-        String studentNumberString = "" + student.getStudentNummer() + "";
-        if (studentNumberString.length() > studentNumberLimit) {
-            studentNumberOverLimit = true;
-        }
 
         // For loop om alle objecten in de arraylist 'studenten' te vergelijken met het
         // nieuwe student object
@@ -250,7 +246,6 @@ public class Utility {
 
         // Wanneer beide checks onwaar zijn word de student ingeschreven
         if (!studentAlreadyExists) {
-            if (!studentNumberOverLimit) {
 
                 studenten.add(student);
                 System.out.println("[i] Student succesvol ingeschreven.");
@@ -259,11 +254,6 @@ public class Utility {
                 json.saveStudents(studenten);
 
                 return true;
-            } else {
-                System.out.println("[!] Student nummer heeft te veel characters.");
-                return false;
-
-            }
         } else {
 
             System.out.println("[!] Student is al ingeschreven.");
@@ -284,16 +274,42 @@ public class Utility {
 
         // Registreerd het opgegeven studentnummer
         System.out.print("Studentnummer: ");
-        int studentenNummer = studentData.nextInt();
+        String studentenNummerString = studentData.nextLine();
 
-        // Nieuw 'student' object wordt aangemaakt met opgegeven data
-        Student student = new Student(studentenNummer);
-        student.setNaam(naam);
-        // studentData.close();
+        boolean validStudentNummer = false;
+        int studentNummer = 0;
 
-        // Het aangemaakte object wordt terug gegeven
-        return student;
+        if(isNumeric(studentenNummerString)) {
+            validStudentNummer = true;
+            studentNummer = Integer.parseInt(studentenNummerString);
+        } else {
+            System.out.println("[!] StudentNummer moet een nummer zijn");
+            return null;
+        }
 
+        if(studentenNummerString.length()>8) {
+            System.out.println("[!] StudentNummer heeft te veel characters ("+studentenNummerString.length()+"). verwacht aantal: (8)");
+            return null;
+        }
+
+        if(studentenNummerString.length()<8) {
+            System.out.println("[!] StudentNummer heeft te weinig characters ("+studentenNummerString.length()+"). verwacht aantal: (8)");
+            return null;
+        }
+
+        if(validStudentNummer && studentNummer != 0) {
+
+            // Nieuw 'student' object wordt aangemaakt met opgegeven data
+            Student student = new Student(studentNummer);
+            student.setNaam(naam);
+            // studentData.close();
+
+            // Het aangemaakte object wordt terug gegeven
+            return student;
+        } else {
+            System.out.println("[!] Er is iets mis gegaan, probeer het opnieuw");
+            return null;
+        }
     }
 
     public static String showStudentMostExams(ArrayList<Student> studenten) {
@@ -348,35 +364,27 @@ public class Utility {
 
         Student student = SearchStudent(studenten, examens);
 
-        // Arraylist vullen met de gehaalde examens van de gevonden student
-        ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
+        if(student != null) {
+            // Arraylist vullen met de gehaalde examens van de gevonden student
+            ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
 
-        // looped door alle gehaalde examens heen
-        boolean heeftExamensGemaakt = false;
-        for (String string : gehaaldeExamens) {
-            System.out.println(string);
-            heeftExamensGemaakt = true;
-        }
+            // looped door alle gehaalde examens heen
+            boolean heeftExamensGemaakt = false;
+            for (String string : gehaaldeExamens) {
+                System.out.println(string);
+                heeftExamensGemaakt = true;
+            }
 
-        // wanneer de student nog geen examens heeft gemaakt wordt deze message getoond
-        if(!heeftExamensGemaakt) {
-            System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft (nog) geen examens gemaakt");
+            // wanneer de student nog geen examens heeft gemaakt wordt deze message getoond
+            if(!heeftExamensGemaakt) {
+                System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft (nog) geen examens gemaakt");
+            }
         }
     }
 
     public static boolean isNumeric(String string) {
-        // Failsafe
-        if (string == null) {
-            return false;
-        }
-
-        // Proberen om een double van de ingevoerde string te maken
-        try {
-            Double.parseDouble(string);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
+        // wordt gecheckt via regular expressions 
+        return string != null && string.matches("[-+]?\\d*\\.?\\d+");
     }
 
     public static int isNumericReturnInt(String string) {
@@ -407,7 +415,12 @@ public class Utility {
         // als de ingevoerde string bestaat uit nummers, wordt er van uit gegaan dat de gebruiker een student wilt opzoeken via een studentnummer
         if(isNumeric(studentInput)) {
            searchStudentByNumber = true;
-            studentNummer = Integer.parseInt(studentInput);
+           try {
+               studentNummer = Integer.parseInt(studentInput);
+           } catch(NumberFormatException e) {
+               System.out.println("[!] Te veel characters");
+               return null;
+           }
         }
 
         if(searchStudentByNumber) {
@@ -451,6 +464,17 @@ public class Utility {
         return null;
     }
 
+    public static int toInt(String string) {
+        if(isNumeric(string)) {
+            try {
+                return Integer.parseInt(string);
+            } catch(NumberFormatException e) {
+                System.out.println("[!] Te veel characters");
+            }
+        }
+        return -1;
+    }
+
     public static boolean hasStudentPassedExam(ArrayList<Student> studenten, ArrayList<Examen> examens) {
         Scanner examenInput = new Scanner(System.in);
         Student student = SearchStudent(studenten, examens);
@@ -471,31 +495,35 @@ public class Utility {
 
         
         System.out.print("Uw selectie: ");
-        int selection = examenInput.nextInt();
+        int selection = toInt(examenInput.nextLine());
         System.out.println("----------------------------------------------------");
 
-        Examen examen = examens.get(selection-1);
-        ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
+        if(selection != -1) {
+            Examen examen = examens.get(selection-1);
+            ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
 
-        // Controleren of de lijst gehaalde examens leeg is
+            // Controleren of de lijst gehaalde examens leeg is
 
-        if(gehaaldeExamens.isEmpty()) {
-            System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft nog geen examens gehaald." );
-            return false;
-        }
-
-        // Controleren of de student het geselecteerde examen heeft gehaald
-        boolean examenNietGevonden = true;
-        for (String string : gehaaldeExamens) {
-            if(string.toLowerCase().equals(examen.getNaam().toLowerCase())) {
-                System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft het examen " + examen.getNaam() + " gehaald");
-                examenNietGevonden = true;
-                return true;
+            if(gehaaldeExamens.isEmpty()) {
+                System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft nog geen examens gehaald." );
+                return false;
             }
-        }
 
-        if(examenNietGevonden) {
-            System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft het examen " + examen.getNaam() + " (nog) niet gehaald");
+            // Controleren of de student het geselecteerde examen heeft gehaald
+            boolean examenNietGevonden = true;
+            for (String string : gehaaldeExamens) {
+                if(string.toLowerCase().equals(examen.getNaam().toLowerCase())) {
+                    System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft het examen " + examen.getNaam() + " gehaald");
+                    examenNietGevonden = true;
+                    return true;
+                }
+            }
+
+            if(examenNietGevonden) {
+                System.out.println("[i] "+student.getNaam() + " ("+student.getStudentNummer()+") heeft het examen " + examen.getNaam() + " (nog) niet gehaald");
+            }
+        } else {
+            System.out.println("[!] Selectie bestaat niet");
         }
         return false;
     }
