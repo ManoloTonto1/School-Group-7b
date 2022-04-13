@@ -498,7 +498,7 @@ public class Utility {
         int selection = toInt(examenInput.nextLine());
         System.out.println("----------------------------------------------------");
 
-        if(selection != -1 && selection <= examens.size()) {
+        if(selection > 0 && selection <= examens.size()) {
             Examen examen = examens.get(selection-1);
             ArrayList<String> gehaaldeExamens = student.getGehaaldeExamens();
 
