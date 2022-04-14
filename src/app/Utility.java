@@ -281,7 +281,12 @@ public class Utility {
 
         if(isNumeric(studentenNummerString)) {
             validStudentNummer = true;
-            studentNummer = Integer.parseInt(studentenNummerString);
+            try {
+                studentNummer = Integer.parseInt(studentenNummerString);
+            } catch(NumberFormatException e) {
+                System.out.println("[!] Te veel characters");
+                return null;
+            }
         } else {
             System.out.println("[!] StudentNummer moet een nummer zijn");
             return null;
