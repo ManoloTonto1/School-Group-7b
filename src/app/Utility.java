@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import javax.swing.plaf.basic.BasicTreeUI.TreeToggleAction;
-
 
 public class Utility {
     static JSON json = JSON.getInstance();
@@ -466,7 +464,7 @@ public class Utility {
 
         
         System.out.print("Uw selectie: ");
-        int selection = examenInput.nextInt();
+        int selection = isNumericReturnInt(examenInput.nextLine());
         System.out.println("----------------------------------------------------");
 
         Examen examen = examens.get(selection-1);
